@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider">
+				<div class="mui-slider-group mui-slider-loop">
+					<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#">
+							<img src="images/lb-2.png">
+						</a>
+					</div>
+					<!-- 第一张 -->
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="images/lb-1.png">
+						</a>
+					</div>
+					<!-- 第二张 -->
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="images/lb-2.png">
+						</a>
+					</div>
+					<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#">
+							<img src="images/lb-1.png">
+						</a>
+					</div>
+				</div>
+				<div class="mui-slider-indicator">
+					<div class="mui-indicator mui-active"></div>
+					<div class="mui-indicator"></div>
+				</div>
+			</div>
+
+			<div class="xs-div-content">
+				<ul class="mui-table-view mui-grid-view mui-grid-9 xs-grid-ul">
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#">
+							<span class="mui-icon iconfont icon-shandian" style="color: #CF2D28;"></span>
+							<div class="mui-media-body">我要贷款</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#">
+							<span class="mui-icon iconfont icon-jindutiaoqiandai" style="color: #2AC845"></span>
+							<div class="mui-media-body">我要还款</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#">
+							<span class="mui-icon iconfont icon-liebiao13-copy" style="color: #3399FF"></span>
+							<div class="mui-media-body">贷款记录</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 xs-grid-li">
+						<a href="#">
+							<span class="mui-icon iconfont icon-anonymous-iconfont" style="color: #EC971F;"></span>
+							<div class="mui-media-body">贷款攻略</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 xs-grid-li">
+						<a href="#">
+							<span class="mui-icon iconfont icon-shenqingedu" style="color: #3399CC;"></span>
+							<div class="mui-media-body">额度查询</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 xs-grid-li">
+						<a href="#">
+							<span class="mui-icon iconfont icon-jindu" style="color: #1BCE6E;"></span>
+							<div class="mui-media-body">进度查询</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="xs-div-content">
+				<ul class="mui-table-view xs-d-info">
+					<li class="mui-table-view-cell"><span class="mui-icon iconfont icon-jiantou-left"></span> 官方客服工作时间：9:00 &minus; 18:00</li>
+					<li class="mui-table-view-cell"><span class="mui-icon iconfont icon-jiantou-left"></span> 借还款请联系官方客服QQ：917661718</li>
+					<li class="mui-table-view-cell"><span class="mui-icon iconfont icon-jiantou-left"></span> 1分钟申请，10分钟审核，30分钟急速放款</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script>
+		(function($, doc) {
+			$.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			//获得slider插件对象
+			var gallery = mui('.mui-slider');
+			gallery.slider({
+				interval: 5000 //自动轮播周期，若为0则不自动播放，默认为0；
+			});
+
+			$.plusReady(function() {
+				
+			});
+		}(mui, document));
+	</script>
+
+</html>

@@ -1,0 +1,105 @@
+@font-face {
+	font-family: iconfont;
+	font-weight: 400;
+	font-style: normal;
+	src: url('../fonts/iconfont.ttf?t=1506764031981') format('truetype') /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+}
+
+.iconfont {
+	font-family: iconfont;
+	font-size: 24px;
+	font-weight: 400;
+	font-style: normal;
+	line-height: 1;
+	display: inline-block;
+	text-decoration: none;
+	-webkit-font-smoothing: antialiased;
+}
+
+.icon-anonymous-iconfont:before {
+	content: "\e63e";
+}
+
+.icon-shenqingedu:before {
+	content: "\e647";
+}
+
+.icon-iconfont-menu:before {
+	content: "\e61f";
+}
+
+.icon-jindutiaoqiandai:before {
+	content: "\e644";
+}
+
+.icon-jiantou-left:before {
+	content: "\e600";
+}
+
+.icon-laba2:before {
+	content: "\e62a";
+}
+
+.icon-new:before {
+	content: "\e60f";
+}
+
+.icon-pinglun:before {
+	content: "\e643";
+}
+
+.icon-pinglun1:before {
+	content: "\e6f4";
+}
+
+.icon-edu:before {
+	content: "\e610";
+}
+
+.icon-web-quit:before {
+	content: "\e69f";
+}
+
+.icon-shezhi:before {
+	content: "\e619";
+}
+
+.icon-suo:before {
+	content: "\e609";
+}
+
+.icon-kan:before {
+	content: "\e628";
+}
+
+.icon-kan1:before {
+	content: "\e607";
+}
+
+.icon-gonglve:before {
+	content: "\e645";
+}
+
+.icon-edu1:before {
+	content: "\e624";
+}
+
+.icon-jiantou-copy-copy:before {
+	content: "\e612";
+}
+
+.icon-shandian:before {
+	content: "\e622";
+}
+
+.icon-ziliao:before {
+	content: "\e60a";
+}
+
+.icon-jindu:before {
+	content: "\e60b";
+}
+
+.icon-liebiao13-copy:before {
+	content: "\e763";
+}
