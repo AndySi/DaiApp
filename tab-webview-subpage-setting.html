@@ -9,13 +9,16 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<style>
 			html,
-			body,.mui-content {
+			body,
+			.mui-content {
 				background-color: #FFF;
 			}
-			.mui-card{
-				box-shadow:0 1px 2px #FFF;
+			
+			.mui-card {
+				box-shadow: 0 1px 2px #FFF;
 			}
 		</style>
 	</head>
@@ -23,7 +26,7 @@
 	<body>
 		<div class="mui-content">
 			<div class="mui-tab-item mui-text-center mui-badge-primary" style="padding: 20px;">
-				<img src="images/applogo.png" style="width:50%;border-radius: 100%;border: 4px #FFB400 solid;"/>
+				<img src="images/applogo.png" style="width:50%;border-radius: 100%;border: 4px #FFB400 solid;" />
 			</div>
 			<div class="mui-card">
 				<ul class="mui-table-view">
@@ -65,21 +68,69 @@
 					</li>
 				</ul>
 			</div>
-			
+			<div class="mui-content-padded">
+				<button id='exit' class="mui-btn mui-btn-block mui-btn-primary">退出登录</button>
+			</div>
 		</div>
 		</style>
 	</body>
 	<script src="js/mui.min.js"></script>
+	<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		mui.init({
 			swipeBack: true //启用右滑关闭功能
 		});
-		/*document.getElementById("about").addEventListener('tap', function() {
-			//获得主页面的webview
-			var main = plus.webview.currentWebview().parent();
-			//触发主页面的gohome事件
-			mui.fire(main, 'gohome');
-		});*/
+		mui.plusReady(function() {
+			document.getElementById("exit").addEventListener('tap', function() {
+				if(mui.os.ios) {
+					app.setState({});
+					mui.openWindow({
+						url: 'login.html',
+						id: 'login',
+						show: {
+							aniShow: 'pop-in'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+					return;
+				}
+				var btnArray = [{
+					title: "注销当前账号"
+				}, {
+					title: "直接关闭应用"
+				}];
+				plus.nativeUI.actionSheet({
+					cancel: "取消",
+					buttons: btnArray
+				}, function(event) {
+					var index = event.index;
+					switch(index) {
+						case 1:
+							//注销账号
+							app.setState({});
+							//若启动页不是登录页，则需通过如下方式打开登录页
+							mui.openWindow({
+								url: 'login.html',
+								id: 'login',
+								show: {
+									aniShow: 'pop-in'
+								}
+							});
+							//获得主页面的webview
+							//var main = plus.webview.currentWebview().parent();
+							//触发主页面的gohome事件
+							//mui.fire(main, 'gohome');
+							break;
+						case 2:
+							plus.runtime.quit();
+							break;
+					}
+				});
+
+			}, false);
+		});
 	</script>
 
 </html>

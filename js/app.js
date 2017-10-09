@@ -19,9 +19,7 @@
 		}
 		
 		plus.nativeUI.toast('登录成功');
-		var state = owner.defaultState; //登录后用默认State覆盖现有的State
-		console.log(JSON.stringify(state));
-		state.isLogin = true; //标记已登录
+		return owner.createState(loginInfo.account, callback);
 		
 		
 		/*$.ajax("http://localhost:8080/", {
@@ -57,19 +55,20 @@
 		});*/
 	};
 
+	owner.createState = function(name, callback) {
+		var state = owner.getState();
+		state.account = name;
+		state.token = "token123456789";
+		state.isLogin = true;
+		owner.setState(state);
+		return callback();
+	};
+	
 	var checkPhone = function(phone) {
 		var reg = /^(((13[0-9]|15[0-9]|18[0-9]{1})|147|170|177)+\d{8})$/;
 		phone = phone || '';
 		return !reg.test(phone);
 	}
-
-	owner.createState = function(name, callback) {
-		var state = owner.getState();
-		state.account = name;
-		state.token = "token123456789";
-		owner.setState(state);
-		return callback();
-	};
 
 	/**
 	 * 新用户注册

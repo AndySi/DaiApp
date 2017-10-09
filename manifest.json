@@ -347,9 +347,13 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"images/applogo.png"
+					"images/applogo.png",
+					"css/style.css",
+					"js/app.js"
 				],
-				"refer": [],
+				"refer": [
+					"login.html"
+				],
 				"priority": 0
 			},
 			"tab-webview-subpage-contact.html": {
