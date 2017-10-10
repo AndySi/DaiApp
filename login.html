@@ -47,7 +47,7 @@
 				$.init({
 					beforeback: function() {
 						//获得父页面的webview
-						var list = plus.webview.currentWebview().opener();　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
+						var list = plus.webview.getLaunchWebview();　　　　
 						mui.fire(list, 'gohome');
 						//返回true,继续页面关闭逻辑
 						return true;
@@ -59,24 +59,11 @@
 					plus.screen.lockOrientation("portrait-primary");
 					var settings = app.getSettings();
 					var state = app.getState();
-					var mainPage = $.preload({
-						"id": 'index',
-						"url": 'index.html'
-					});
-					var main_loaded_flag = false;
-					mainPage.addEventListener("loaded", function() {
-						main_loaded_flag = true;
-					});
+					
 					var toMain = function() {
-						//使用定时器的原因：
-						//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
-						var id = setInterval(function() {
-							if(main_loaded_flag) {
-								clearInterval(id);
-								$.fire(mainPage, 'show', null);
-								mainPage.show("pop-in");
-							}
-						}, 20);
+						var homeView = plus.webview.getLaunchWebview();
+						mui.fire(homeView, 'gohome');
+						homeView.show('slide-in-right');
 					};
 					//检查 "登录状态/锁屏状态" 开始
 					if(state.token && settings.gestures) {
