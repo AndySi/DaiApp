@@ -80,7 +80,9 @@
 		mui.init({
 			swipeBack: true //启用右滑关闭功能
 		});
+		console.log("经过不。。。。。");
 		mui.plusReady(function() {
+			
 			document.getElementById("exit").addEventListener('tap', function() {
 				if(mui.os.ios) {
 					app.setState({});
@@ -109,7 +111,8 @@
 					switch(index) {
 						case 1:
 							//注销账号
-							app.setState({});
+							//app.setAccount({});
+							localStorage.clear();
 							//若启动页不是登录页，则需通过如下方式打开登录页
 							mui.openWindow({
 								url: 'login.html',
@@ -118,10 +121,6 @@
 									aniShow: 'pop-in'
 								}
 							});
-							//获得主页面的webview
-							//var main = plus.webview.currentWebview().parent();
-							//触发主页面的gohome事件
-							//mui.fire(main, 'gohome');
 							break;
 						case 2:
 							plus.runtime.quit();

@@ -7,7 +7,6 @@
 		loginInfo = loginInfo || {};
 		loginInfo.account = loginInfo.account || '';
 		loginInfo.password = loginInfo.password || '';
-		loginInfo.token = "gkgkepwqgtgan";
 		if(loginInfo.account.length != 11) {
 			return callback('手机号最短为 11 个字符');
 		}
@@ -19,7 +18,7 @@
 		}
 		
 		plus.nativeUI.toast('登录成功');
-		return owner.createState(loginInfo.account, callback);
+		return owner.createAccount(loginInfo, callback);
 		
 		
 		/*$.ajax("http://localhost:8080/", {
@@ -55,13 +54,28 @@
 		});*/
 	};
 
-	owner.createState = function(name, callback) {
-		var state = owner.getState();
-		state.account = name;
-		state.token = "token123456789";
-		state.isLogin = true;
-		owner.setState(state);
+	owner.createAccount = function(userInfo, callback) {
+		var info = owner.getAccount();
+		info.nick = userInfo.name;
+		info.token = userInfo.token;
+		info.isLogin = true;
+		owner.setAccount(info);
 		return callback();
+	};
+	
+	/**
+	 * 设置当前用户信息
+	 **/
+	owner.setAccount = function(userInfo) {
+		userInfo = userInfo || {};
+		localStorage.setItem('$account', JSON.stringify(userInfo));
+	};
+	/**
+	 * 获取当前用户信息
+	 **/
+	owner.getAccount = function() {
+		var stateText = localStorage.getItem('$account') || "{}";
+		return JSON.parse(stateText);
 	};
 	
 	var checkPhone = function(phone) {
@@ -93,79 +107,6 @@
 		return callback();
 	};
 
-	/**
-	 * 设置当前状态
-	 **/
-	owner.setState = function(state) {
-		state = state || {};
-		localStorage.setItem('$state', JSON.stringify(state));
-	};
-
-	/**
-	 * 获取当前状态
-	 **/
-	owner.getState = function() {
-		var stateText = localStorage.getItem('$state') || "{}";
-		return JSON.parse(stateText);
-	};
-
-	/**
-	 * 要求登陆后才能执行回调函数 
-	 */
-	owner.loginRequired = function(callback) {
-		var state = owner.getState();
-		console.log("判断是否登录");
-		if(state.isLogin) { //已登录，直接执行
-			callback();
-		} else {
-			// 打开登录页
-			$.openWindow({
-				url: 'login.html',
-				id: 'login',
-				show: {
-					autoShow: true, //页面loaded事件发生后自动显示，默认为true  
-					aniShow: animationType, //页面显示动画，默认为”slide-in-right“；  
-					duration: animationTime //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；  
-				}
-			});
-			/*owner.tryAutoLogin(function(data) {
-				if(data.Code == 1) { //自动登录成功则执行回调函数
-					callback();
-				} else { //自动登录失败，显示登录页面
-					var v = plus.webview.getWebviewById('login');
-					if(!v) {
-						mui.toast('error:cannot find login');
-					} else {
-						v.show('slide-in-right', 300);
-					}
-				}
-			});*/
-		}
-	}
-
-	/**
-	 * 尝试自动登录
-	 * @param {Object} callback 接收一个字典参数data，data.Code>0表示登录成功
-	 */
-	owner.tryAutoLogin = function(callback) {
-		var state = owner.getState();
-		if(state.isLogin) {
-			callback({
-				Code: 1
-			});
-			return;
-		}
-		var user = JSON.parse(localStorage.getItem('$user'));
-		//需要在登录或注册成功时将用户信息保存在localStorage中
-		var settings = owner.getSettings();
-		if(settings.autoLogin && user && user.name) {
-			owner.login(user, callback);
-		} else {
-			callback({
-				Code: -1
-			});
-		}
-	}
 
 	/**
 	 * 找回密码
@@ -177,21 +118,4 @@
 		}
 		return callback(null, '新的随机密码已经发送到您的邮箱，请查收邮件。');
 	};
-
-	/**
-	 * 获取应用本地配置
-	 **/
-	owner.setSettings = function(settings) {
-		settings = settings || {};
-		localStorage.setItem('$settings', JSON.stringify(settings));
-	}
-
-	/**
-	 * 设置应用本地配置
-	 **/
-	owner.getSettings = function() {
-		var settingsText = localStorage.getItem('$settings') || "{}";
-		return JSON.parse(settingsText);
-	}
-
 }(mui, window.app = {}));

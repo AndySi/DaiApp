@@ -49,7 +49,8 @@
 			"tab-webview-subpage-about.html",
 			"tab-webview-subpage-setting.html",
 			"tab-webview-subpage-chat.html",
-			"tab-webview-subpage-contact.html"
+			"tab-webview-subpage-contact.html",
+			"tab-webview-subpage-user.html"
 		]
 	},
 	"tab-webview-subpage-help.html": {
@@ -80,7 +81,9 @@
 			"js/app.js",
 			"js/mui.min.js",
 			"fonts/mui.ttf",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"css/iconfont.css",
+			"fonts/iconfont.ttf"
 		],
 		"refer": [
 			"index.html"

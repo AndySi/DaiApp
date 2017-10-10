@@ -264,7 +264,9 @@
 					"images/qq.png",
 					"images/sinaweibo.png",
 					"images/weixin.png",
-					"images/applogo.png"
+					"images/applogo.png",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [
 					"unlock.html",
@@ -315,7 +317,8 @@
 					"login.html",
 					"tab-webview-subpage-setting.html",
 					"tab-webview-subpage-chat.html",
-					"tab-webview-subpage-contact.html"
+					"tab-webview-subpage-contact.html",
+					"tab-webview-subpage-user.html"
 				],
 				"priority": 0
 			},

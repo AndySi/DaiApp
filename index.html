@@ -26,7 +26,7 @@
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">首页</span>
 			</a>
-			<a id="userTab" class="mui-tab-item" href="tab-webview-subpage-contact.html">
+			<a id="userTab" class="mui-tab-item" href="tab-webview-subpage-user.html">
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">个人中心</span>
 			</a>
@@ -40,7 +40,7 @@
 		<script type="text/javascript" charset="utf-8">
 			//mui初始化
 			mui.init();
-			var subpages = ['tab-webview-subpage-home.html', 'tab-webview-subpage-contact.html', 'tab-webview-subpage-setting.html'];
+			var subpages = ['tab-webview-subpage-home.html', 'tab-webview-subpage-user.html', 'tab-webview-subpage-setting.html'];
 			var subpage_style = {
 				top: '45px',
 				bottom: '51px'
@@ -80,8 +80,8 @@
 					return;
 				}
 				if(targetId == 'userTab') {
-					var state = app.getState();
-					if(!state.isLogin) {
+					var info = app.getAccount();
+					if(!info.isLogin) {
 						mui.openWindow({
 							url: 'login.html',
 							id: 'login',

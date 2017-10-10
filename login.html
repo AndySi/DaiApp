@@ -4,8 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title></title>
+		<title>登录</title>
 		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
 		<link href="css/style.css" rel="stylesheet" />
 	</head>
 
@@ -18,21 +19,21 @@
 			<div class="xs-logo">
 				<img src="images/applogo.png" />
 			</div>
-			<div class="mui-card">
+			<div class="mui-card xs-card">
 				<form id='login-form' class="mui-input-group">
 					<div class="mui-input-row">
-						<label>账号</label>
-						<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入注册的手机号">
+						<label><span class="mui-icon iconfont icon-yonghu"></span></label>
+						<input id='account' type="text" class="mui-input-clear" value="18573163183" placeholder="请输入注册的手机号">
 					</div>
 					<div class="mui-input-row">
-						<label>密码</label>
-						<input id='password' type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
+						<label><span class="mui-icon iconfont icon-mima"></span></label>
+						<input id='password' type="password" class="mui-input-clear" value="123456" placeholder="请输入密码">
 					</div>
 				</form>
 			</div>
 
 			<div class="mui-content-padded">
-				<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
+				<button id='login' class="mui-btn mui-btn-block xs-color-blue">登录</button>
 				<div class="link-area">
 					<a id='reg'>注册账号</a> <span class="spliter">|</span>
 					<a id='forgetPassword'>忘记密码</a>
@@ -52,48 +53,26 @@
 						//返回true,继续页面关闭逻辑
 						return true;
 					}
-					// statusBarBackground: '#f7f7f7'
 				});
+
+				var loginButton, accountBox, passwordBox, regButton, forgetButton;
+
 				$.plusReady(function() {
 					// 恢复竖屏
 					plus.screen.lockOrientation("portrait-primary");
-					var settings = app.getSettings();
-					var state = app.getState();
-					
-					var toMain = function() {
-						var homeView = plus.webview.getLaunchWebview();
-						mui.fire(homeView, 'gohome');
-						homeView.show('slide-in-right');
-					};
-					//检查 "登录状态/锁屏状态" 开始
-					if(state.token && settings.gestures) {
-						$.openWindow({
-							url: 'unlock.html',
-							id: 'unlock',
-							show: {
-								aniShow: 'pop-in'
-							},
-							waiting: {
-								autoShow: false
-							}
-						});
-					} else if(state.token) {
-						toMain();
+
+					loginButton = doc.getElementById('login');
+					accountBox = doc.getElementById('account');
+					passwordBox = doc.getElementById('password');
+					regButton = doc.getElementById('reg');
+					forgetButton = doc.getElementById('forgetPassword');
+
+					//检测本地的登录过的账号
+					if(localStorage.getItem('$account')) {
+						accountBox.value = localStorage.getItem('$account');
 					}
-					// close splash
-					setTimeout(function() {
-						//关闭 splash
-						plus.navigator.closeSplashscreen();
-					}, 600);
 
-					
-
-					//检查 "登录状态/锁屏状态" 结束
-					var loginButton = doc.getElementById('login');
-					var accountBox = doc.getElementById('account');
-					var passwordBox = doc.getElementById('password');
-					var regButton = doc.getElementById('reg');
-					var forgetButton = doc.getElementById('forgetPassword');
+					//登陆的点击事件
 					loginButton.addEventListener('tap', function(event) {
 						var loginInfo = {
 							account: accountBox.value,
@@ -104,7 +83,12 @@
 								plus.nativeUI.toast(err);
 								return;
 							}
-							toMain();
+							//登录成功,向需要的页面发送消息事件通知已经登录做响应的处理
+							var homeView = plus.webview.getLaunchWebview();
+							var setView = plus.webview.getWebviewById("tab-webview-subpage-setting.html");
+							$.fire(homeView, 'gohome');
+							$.fire(setView, 'loginSuccess');
+							homeView.show('slide-in-right');
 						});
 					});
 					$.enterfocus('#login-form input', function() {
@@ -142,17 +126,9 @@
 							}
 						});
 					}, false);
-					//
-					window.addEventListener('resize', function() {
-						oauthArea.style.display = document.body.clientHeight > 400 ? 'block' : 'none';
-					}, false);
 					// 重写mui.back()方法
 					var old_back = $.back;
 					$.back = function(event) {
-						// 获取目标口窗口对象
-						var target = plus.webview.getWebviewById('home');
-						// 执行相应的事件
-						// $.fire(target, 'customEvent', {});
 						old_back();
 					};
 				});
