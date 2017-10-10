@@ -80,8 +80,7 @@
 					return;
 				}
 				if(targetId == 'userTab') {
-					var info = app.getAccount();
-					if(!info.isLogin) {
+					if(!localStorage.getItem('$user')) {
 						mui.openWindow({
 							url: 'login.html',
 							id: 'login',

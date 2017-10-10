@@ -69,10 +69,9 @@
 				</ul>
 			</div>
 			<div class="mui-content-padded">
-				<button id='exit' class="mui-btn mui-btn-block mui-btn-primary">退出登录</button>
+				<button id='exit' class="mui-btn mui-btn-block xs-color-blue" style="color: #fff;">退出登录</button>
 			</div>
 		</div>
-		</style>
 	</body>
 	<script src="js/mui.min.js"></script>
 	<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
@@ -80,10 +79,16 @@
 		mui.init({
 			swipeBack: true //启用右滑关闭功能
 		});
-		console.log("经过不。。。。。");
+		var logoutBtn;
 		mui.plusReady(function() {
-			
-			document.getElementById("exit").addEventListener('tap', function() {
+			logoutBtn = document.getElementById("exit");
+			//检测是否已经登录
+			if (!localStorage.getItem('$user')) {
+				logoutBtn.style.display = 'none';
+			}else {
+				logoutBtn.style.display = 'block';
+			}
+			logoutBtn.addEventListener('tap', function() {
 				if(mui.os.ios) {
 					app.setState({});
 					mui.openWindow({
@@ -112,15 +117,17 @@
 						case 1:
 							//注销账号
 							//app.setAccount({});
-							localStorage.clear();
+							localStorage.removeItem('$user');
+							logoutBtn.style.display = 'none';
+							mui.toast('退出登录成功');
 							//若启动页不是登录页，则需通过如下方式打开登录页
-							mui.openWindow({
+							/*mui.openWindow({
 								url: 'login.html',
 								id: 'login',
 								show: {
 									aniShow: 'pop-in'
 								}
-							});
+							});*/
 							break;
 						case 2:
 							plus.runtime.quit();
@@ -129,6 +136,11 @@
 				});
 
 			}, false);
+			//接收登录成功事件
+			window.addEventListener('loginSuccess',function(){
+				//登出按钮显示出来 头像图片显示出来名字显示出来
+				logoutBtn.style.display = 'block';
+			},false);
 		});
 	</script>
 

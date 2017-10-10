@@ -90,10 +90,13 @@
 							$.fire(setView, 'loginSuccess');
 							homeView.show('slide-in-right');
 						});
-					});
+					},false);
+					
 					$.enterfocus('#login-form input', function() {
 						$.trigger(loginButton, 'tap');
 					});
+					
+					//注册
 					regButton.addEventListener('tap', function(event) {
 						$.openWindow({
 							url: 'reg.html',
@@ -110,6 +113,8 @@
 							}
 						});
 					}, false);
+					
+					//忘记密码
 					forgetButton.addEventListener('tap', function(event) {
 						$.openWindow({
 							url: 'forget_password.html',
@@ -126,6 +131,7 @@
 							}
 						});
 					}, false);
+					
 					// 重写mui.back()方法
 					var old_back = $.back;
 					$.back = function(event) {

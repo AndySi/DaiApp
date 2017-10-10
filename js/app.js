@@ -18,7 +18,7 @@
 		}
 		
 		plus.nativeUI.toast('登录成功');
-		return owner.createAccount(loginInfo, callback);
+		return owner.createUser(loginInfo, callback);
 		
 		
 		/*$.ajax("http://localhost:8080/", {
@@ -53,37 +53,27 @@
 			}
 		});*/
 	};
-
-	owner.createAccount = function(userInfo, callback) {
-		var info = owner.getAccount();
-		info.nick = userInfo.name;
-		info.token = userInfo.token;
-		info.isLogin = true;
-		owner.setAccount(info);
-		return callback();
-	};
 	
 	/**
-	 * 设置当前用户信息
-	 **/
-	owner.setAccount = function(userInfo) {
-		userInfo = userInfo || {};
-		localStorage.setItem('$account', JSON.stringify(userInfo));
-	};
+	 * 创建用户信息
+	 * @param {Object} data
+	 * @param {Object} callback
+	 */
+	owner.createUser = function(data, callback){
+		data = data || {};
+		localStorage.setItem('$user', JSON.stringify(data));
+		localStorage.setItem('$account', data.account);
+		return callback();
+	}
+	
 	/**
 	 * 获取当前用户信息
 	 **/
-	owner.getAccount = function() {
-		var stateText = localStorage.getItem('$account') || "{}";
-		return JSON.parse(stateText);
+	owner.getUser = function() {
+		var userInfo = localStorage.getItem('$user') || "{}";
+		return JSON.parse(userInfo);
 	};
 	
-	var checkPhone = function(phone) {
-		var reg = /^(((13[0-9]|15[0-9]|18[0-9]{1})|147|170|177)+\d{8})$/;
-		phone = phone || '';
-		return !reg.test(phone);
-	}
-
 	/**
 	 * 新用户注册
 	 **/
@@ -101,9 +91,9 @@
 		if(!checkEmail(regInfo.email)) {
 			return callback('邮箱地址不合法');
 		}
-		var users = JSON.parse(localStorage.getItem('$users') || '[]');
-		users.push(regInfo);
-		localStorage.setItem('$users', JSON.stringify(users));
+		var user = JSON.parse(localStorage.getItem('$user') || '[]');
+		user.push(regInfo);
+		localStorage.setItem('$user', JSON.stringify(user));
 		return callback();
 	};
 
@@ -118,4 +108,10 @@
 		}
 		return callback(null, '新的随机密码已经发送到您的邮箱，请查收邮件。');
 	};
+	
+	var checkPhone = function(phone) {
+		var reg = /^(((13[0-9]|15[0-9]|18[0-9]{1})|147|170|177)+\d{8})$/;
+		phone = phone || '';
+		return !reg.test(phone);
+	}
 }(mui, window.app = {}));
