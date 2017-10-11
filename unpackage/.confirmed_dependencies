@@ -1,121 +1,121 @@
 {
-	"main.html": {
-		"resources": [
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"tab-webview-subpage-home.html"
-		],
-		"refer": [
-			"tab-webview-subpage-home.html"
-		]
-	},
-	"tab-webview-subpage-home.html": {
-		"resources": [
-			"images/201709110004_400x300.png",
-			"images/201709110003_400x300.png",
-			"images/201709110002_400x300.png",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"images/lb-2.png",
-			"images/lb-1.png",
-			"css/iconfont.css",
-			"fonts/iconfont.ttf",
-			"css/style.css"
-		],
-		"refer": []
-	},
-	"guide.html": {
-		"resources": [
-			"images/guide-1.png"
-		]
-	},
-	"index.html": {
-		"resources": [
-			"tab-webview-subpage-home.html",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"js/app.js",
-			"tab-webview-subpage-about.html",
-			"js/load.js",
-			"js/md5.js"
-		],
-		"refer": [
-			"guide.html",
-			"tab-webview-subpage-home.html",
-			"tab-webview-subpage-help.html",
-			"tab-webview-subpage-center.html",
-			"login.html",
-			"tab-webview-subpage-about.html",
-			"tab-webview-subpage-setting.html",
-			"tab-webview-subpage-chat.html",
-			"tab-webview-subpage-contact.html",
-			"tab-webview-subpage-user.html"
-		]
-	},
-	"tab-webview-subpage-help.html": {
-		"resources": [
-			"css/feedback.css",
-			"img/logo.png",
-			"js/feedback.js",
-			"js/mui.view.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		]
-	},
-	"tab-webview-subpage-center.html": {
-		"resources": [
-			"js/app.js",
-			"js/mui.min.js"
-		],
-		"refer": [
-			"login.html"
-		]
-	},
-	"login.html": {
-		"resources": [
-			"images/applogo.png",
-			"css/style.css",
-			"js/mui.enterfocus.js",
-			"js/app.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"css/iconfont.css",
-			"fonts/iconfont.ttf"
-		],
-		"refer": [
-			"index.html"
-		]
-	},
-	"tab-webview-subpage-setting.html": {
-		"resources": [
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"images/applogo.png",
-			"css/style.css",
-			"js/app.js"
-		],
-		"refer": [
-			"login.html"
-		]
-	},
-	"tab-webview-subpage-contact.html": {
-		"resources": [
-			"js/mui.min.js",
-			"css/mui.min.css"
-		]
-	},
-	"tab-webview-subpage-user.html": {
-		"resources": [
-			"img/bg-960_720.png",
-			"css/iconfont.css",
-			"css/style.css",
-			"fonts/iconfont.ttf"
-		]
-	}
+  "main.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "tab-webview-subpage-home.html"
+    ],
+    "refer": [
+      "tab-webview-subpage-home.html"
+    ]
+  },
+  "tab-webview-subpage-home.html": {
+    "resources": [
+      "images/201709110004_400x300.png",
+      "images/201709110003_400x300.png",
+      "images/201709110002_400x300.png",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "images/lb-2.png",
+      "images/lb-1.png",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf",
+      "css/style.css"
+    ],
+    "refer": []
+  },
+  "guide.html": {
+    "resources": [
+      "images/guide-1.png"
+    ]
+  },
+  "index.html": {
+    "resources": [
+      "tab-webview-subpage-home.html",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/app.js",
+      "tab-webview-subpage-about.html",
+      "js/load.js",
+      "js/md5.js"
+    ],
+    "refer": [
+      "guide.html",
+      "tab-webview-subpage-home.html",
+      "tab-webview-subpage-help.html",
+      "tab-webview-subpage-center.html",
+      "login.html",
+      "tab-webview-subpage-about.html",
+      "tab-webview-subpage-setting.html",
+      "tab-webview-subpage-chat.html",
+      "tab-webview-subpage-contact.html",
+      "tab-webview-subpage-user.html"
+    ]
+  },
+  "tab-webview-subpage-help.html": {
+    "resources": [
+      "css/feedback.css",
+      "img/logo.png",
+      "js/feedback.js",
+      "js/mui.view.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ]
+  },
+  "tab-webview-subpage-center.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js"
+    ],
+    "refer": [
+      "login.html"
+    ]
+  },
+  "login.html": {
+    "resources": [
+      "images/applogo.png",
+      "css/style.css",
+      "js/mui.enterfocus.js",
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf"
+    ],
+    "refer": [
+      "index.html"
+    ]
+  },
+  "tab-webview-subpage-setting.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "images/applogo.png",
+      "css/style.css",
+      "js/app.js"
+    ],
+    "refer": [
+      "login.html"
+    ]
+  },
+  "tab-webview-subpage-contact.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ]
+  },
+  "tab-webview-subpage-user.html": {
+    "resources": [
+      "img/bg-960_720.png",
+      "css/iconfont.css",
+      "css/style.css",
+      "fonts/iconfont.ttf"
+    ]
+  }
 }
