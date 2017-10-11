@@ -50,6 +50,12 @@
 
 			//创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
+				// close splash
+				setTimeout(function() {
+					//关闭 splash
+					plus.navigator.closeSplashscreen();
+				}, 600);
+					
 				var views = plus.webview.all();
 				console.log("窗口数量"+views.length);
 				var self = plus.webview.currentWebview();

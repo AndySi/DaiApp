@@ -1,3 +1,51 @@
+var md5_element = document.createElement('script');
+md5_element.setAttribute("type", "text/javascript");
+md5_element.setAttribute("src", "js/md5.js"); // 在这里引入了md5.js,md5加密保护
+document.body.appendChild(md5_element);
+
+var load_element = document.createElement("script");
+load_element.setAttribute("type", "text/javascript");
+load_element.setAttribute("src", "js/load.js"); // 在这里引入了load.js
+document.body.appendChild(load_element);
+
+var v = "v1.0";
+var httpUrl = "http://localhost:8080/idou_dai/router?";
+// app唯一键
+var app_key = "idou";
+var app_secret = "9e304d4e8df1b74cfa009913198428ab";
+// 签名(md5(param+key+secret))
+var app_digest = "";
+
+/**
+ * 获取时间戳
+ */
+function getTimestamp() {
+	return(Date.parse(new Date()) / 1000).toString();
+}
+
+/**
+ * 获取sign签名 
+ * @param {Object} params
+ */
+function getSign(params) {
+	return b64_md5(params + app_key + app_secret);
+}
+
+/**
+ * 获取请求数据的
+ * @param {Object} params
+ */
+function getReqData(params) {
+	var data = {
+		appkey: app_key, //appID
+		params: params, //Json字符串
+		timestamp: getTimestamp(), //时间戳
+		digest: getSign(params), //签名摘要
+		version: v //app版本
+	}
+	return data;
+}
+
 (function($, owner) {
 	/**
 	 * 用户登录
@@ -16,11 +64,10 @@
 		if(checkPhone(loginInfo.account)) {
 			return callback('请输入有效的手机号码');
 		}
-		
+
 		plus.nativeUI.toast('登录成功');
 		return owner.createUser(loginInfo, callback);
-		
-		
+
 		/*$.ajax("http://localhost:8080/", {
 			data: loginInfo,
 			dataType: 'json', //服务器返回json格式数据
@@ -53,19 +100,19 @@
 			}
 		});*/
 	};
-	
+
 	/**
 	 * 创建用户信息
 	 * @param {Object} data
 	 * @param {Object} callback
 	 */
-	owner.createUser = function(data, callback){
+	owner.createUser = function(data, callback) {
 		data = data || {};
 		localStorage.setItem('$user', JSON.stringify(data));
 		localStorage.setItem('$account', data.account);
 		return callback();
 	}
-	
+
 	/**
 	 * 获取当前用户信息
 	 **/
@@ -73,7 +120,7 @@
 		var userInfo = localStorage.getItem('$user') || "{}";
 		return JSON.parse(userInfo);
 	};
-	
+
 	/**
 	 * 新用户注册
 	 **/
@@ -97,7 +144,6 @@
 		return callback();
 	};
 
-
 	/**
 	 * 找回密码
 	 **/
@@ -108,7 +154,7 @@
 		}
 		return callback(null, '新的随机密码已经发送到您的邮箱，请查收邮件。');
 	};
-	
+
 	var checkPhone = function(phone) {
 		var reg = /^(((13[0-9]|15[0-9]|18[0-9]{1})|147|170|177)+\d{8})$/;
 		phone = phone || '';
