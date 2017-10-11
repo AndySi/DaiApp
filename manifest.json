@@ -305,7 +305,9 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"js/app.js",
-					"tab-webview-subpage-about.html"
+					"tab-webview-subpage-about.html",
+					"js/load.js",
+					"js/md5.js"
 				],
 				"refer": [
 					"guide.html",
@@ -360,6 +362,16 @@
 				"resources": [
 					"js/mui.min.js",
 					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tab-webview-subpage-user.html": {
+				"resources": [
+					"img/bg-960_720.png",
+					"css/iconfont.css",
+					"css/style.css",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [],
 				"priority": 0
