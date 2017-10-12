@@ -155,6 +155,24 @@ function getReqData(params) {
 		return callback(null, '新的随机密码已经发送到您的邮箱，请查收邮件。');
 	};
 
+	//一般情况下设置anishow
+	owner.getaniShow = function() {
+		var aniShow = 'pop-in';
+		if(mui.os.android) {
+			var androidlist = document.querySelectorAll('ios-only');
+			if(androidlist) {
+				mui.each(androidlist, function(num, obj) {
+					obj.style.display = 'none';
+				});
+			}
+
+			if(parseFloat(mui.os.version) < 4.4) {
+				aniShow = 'slide-in-right';
+			}
+		}
+
+		return aniShow;
+	}
 	var checkPhone = function(phone) {
 		var reg = /^(((13[0-9]|15[0-9]|18[0-9]{1})|147|170|177)+\d{8})$/;
 		phone = phone || '';

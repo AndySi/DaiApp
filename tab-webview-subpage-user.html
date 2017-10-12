@@ -39,10 +39,11 @@
 				height: 100%;
 			}
 			
-			.xs-d-info{
+			.xs-d-info {
 				margin-top: 10px;
 			}
-			.xs-d-info .mui-table-view-cell span{
+			
+			.xs-d-info .mui-table-view-cell span {
 				margin: 0 8px
 			}
 		</style>
@@ -53,7 +54,7 @@
 			<div class="xs-head-img">
 				<div class="xs-user">
 					<div>
-						<font class="mui-icon mui-icon-person" style="font-size: 3.8em; color: white;"></font>
+						<span id="touxiangimg" class="mui-icon mui-icon-person" style="font-size: 3.8em; color: white;"></span>
 					</div>
 					<span style="color: #FFF;">点击登录</span>
 				</div>
@@ -61,27 +62,27 @@
 
 			<ul class="mui-table-view xs-d-info">
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="../Mine/my-dingdan-needtem.html">
-						<span class="mui-icon iconfont icon-icon-person-info"></span>   个人信息
+					<a class="mui-navigate-right" href="userHtml/user-info.html">
+						<span class="mui-icon iconfont icon-icon-person-info"></span> 个人信息
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a id="changeaddress" class="mui-navigate-right" href="../Mine/change-address-needtem.html">
+					<a id="changeaddress" class="mui-navigate-right" href="#">
 						<span class="mui-icon iconfont icon-jilu"></span> 还款记录
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a id="changeaddress" class="mui-navigate-right" href="../Mine/change-address-needtem.html">
+					<a id="changeaddress" class="mui-navigate-right" href="#">
 						<span class="mui-icon iconfont icon-bangzhuzhongxin"></span> 帮助中心
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a id="changeaddress" class="mui-navigate-right" href="../Mine/change-address-needtem.html">
+					<a id="changeaddress" class="mui-navigate-right" href="#">
 						<span class="mui-icon iconfont icon-guanyuwomen2"></span> 关于我们
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a id="changeaddress" class="mui-navigate-right" href="../Mine/change-address-needtem.html">
+					<a id="changeaddress" class="mui-navigate-right" href="#">
 						<span class="mui-icon iconfont icon-shezhi"></span> 设置
 					</a>
 				</li>
@@ -89,9 +90,69 @@
 		</div>
 	</body>
 	<script src="js/mui.min.js"></script>
+	<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		mui.init({
 			swipeBack: true //启用右滑关闭功能
+		});
+
+		var aniShow;
+		var parentWebView;
+		var touxiangimg;
+
+		mui.plusReady(function() {
+			parentWebView = plus.webview.currentWebview().parent();
+			aniShow = app.getaniShow();
+			touxiangimg = document.getElementById('touxiangimg');
+
+			//检测是否已经登录
+			if(localStorage.getItem('$user')) {
+
+			}
+
+			mui('.mui-table-view').on('tap', 'a', function() {
+				var id = this.getAttribute('href');
+				var href = this.href;
+				var title = this.innerText;
+				var isBars = false;
+				var barsIcon = '';
+				//检测是否登陆
+				if(!localStorage.getItem('$user')) {
+					href = "login.html";
+					id = "login.html";
+					aniShow = 'slide-in-bottom';
+					title = '登录';
+
+					mui.fire(parentWebView, 'newWebView', {
+						id: id,
+						href: href,
+						aniShow: aniShow,
+						title: title,
+						isBars: isBars,
+						barsIcon: barsIcon
+					});
+				}
+			});
+
+			touxiangimg.addEventListener('tap', function() {
+				if(!localStorage.getItem('$user')) {
+					var id = "login.html";
+					var href = "login.html";
+					var title = '登录';
+					var aniShow = 'slide-in-bottom';
+					var isBars = false;
+					var barsIcon = '';
+
+					mui.fire(parentWebView, 'newWebView', {
+						id: id,
+						href: href,
+						aniShow: aniShow,
+						title: title,
+						isBars: isBars,
+						barsIcon: barsIcon
+					});
+				}
+			}, false);
 		});
 	</script>
 

@@ -46,21 +46,20 @@
 		<script>
 			(function($, doc) {
 				$.init({
-					beforeback: function() {
-						//获得父页面的webview
-						var list = plus.webview.getLaunchWebview();　　　　
-						mui.fire(list, 'gohome');
-						//返回true,继续页面关闭逻辑
-						return true;
-					}
+					swipeBack: true
 				});
 
-				var loginButton, accountBox, passwordBox, regButton, forgetButton;
+				var loginWebview;
+				var loginButton;
+				var accountBox;
+				var passwordBox;
+				var regButton;
+				var forgetButton;
 
 				$.plusReady(function() {
 					// 恢复竖屏
 					plus.screen.lockOrientation("portrait-primary");
-
+					loginWebview = plus.webview.currentWebview();
 					loginButton = doc.getElementById('login');
 					accountBox = doc.getElementById('account');
 					passwordBox = doc.getElementById('password');
@@ -83,19 +82,21 @@
 								plus.nativeUI.toast(err);
 								return;
 							}
-							//登录成功,向需要的页面发送消息事件通知已经登录做响应的处理
-							var homeView = plus.webview.getLaunchWebview();
-							var setView = plus.webview.getWebviewById("tab-webview-subpage-setting.html");
-							$.fire(homeView, 'gohome');
-							$.fire(setView, 'loginSuccess');
-							homeView.show('slide-in-right');
+							mui.back();
 						});
-					},false);
-					
+					}, false);
+
 					$.enterfocus('#login-form input', function() {
 						$.trigger(loginButton, 'tap');
 					});
-					
+
+					//登录成功,向需要的页面发送消息事件通知已经登录做响应的处理
+					loginWebview.addEventListener('hide', function() {
+						var homeView = plus.webview.getLaunchWebview();
+						var setView = plus.webview.getWebviewById("tab-webview-subpage-setting.html");
+						$.fire(setView, 'loginSuccess', {});
+						loginWebview.close();
+					})
 					//注册
 					regButton.addEventListener('tap', function(event) {
 						$.openWindow({
@@ -113,7 +114,7 @@
 							}
 						});
 					}, false);
-					
+
 					//忘记密码
 					forgetButton.addEventListener('tap', function(event) {
 						$.openWindow({
@@ -131,12 +132,6 @@
 							}
 						});
 					}, false);
-					
-					// 重写mui.back()方法
-					var old_back = $.back;
-					$.back = function(event) {
-						old_back();
-					};
 				});
 			}(mui, document));
 		</script>

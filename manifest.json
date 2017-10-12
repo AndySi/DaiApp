@@ -263,7 +263,9 @@
 					"images/weixin.png",
 					"images/applogo.png",
 					"css/iconfont.css",
-					"fonts/iconfont.ttf"
+					"fonts/iconfont.ttf",
+					"js/load.js",
+					"js/md5.js"
 				],
 				"refer": [
 					"unlock.html",
@@ -351,7 +353,9 @@
 					"css/mui.min.css",
 					"images/applogo.png",
 					"css/style.css",
-					"js/app.js"
+					"js/app.js",
+					"js/load.js",
+					"js/md5.js"
 				],
 				"refer": [
 					"login.html"
@@ -371,7 +375,13 @@
 					"img/bg-960_720.png",
 					"css/iconfont.css",
 					"css/style.css",
-					"fonts/iconfont.ttf"
+					"fonts/iconfont.ttf",
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/load.js",
+					"js/md5.js"
 				],
 				"refer": [],
 				"priority": 0

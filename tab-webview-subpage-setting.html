@@ -120,14 +120,6 @@
 							localStorage.removeItem('$user');
 							logoutBtn.style.display = 'none';
 							mui.toast('退出登录成功');
-							//若启动页不是登录页，则需通过如下方式打开登录页
-							/*mui.openWindow({
-								url: 'login.html',
-								id: 'login',
-								show: {
-									aniShow: 'pop-in'
-								}
-							});*/
 							break;
 						case 2:
 							plus.runtime.quit();
