@@ -99,19 +99,46 @@
 		</div>
 	</body>
 	<script src="js/mui.min.js"></script>
+	<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		(function($, doc) {
 			$.init({
-				swipeBack: true //启用右滑关闭功能
+				swipeBack: false //启用右滑关闭功能
 			});
 			//获得slider插件对象
 			var gallery = mui('.mui-slider');
 			gallery.slider({
 				interval: 5000 //自动轮播周期，若为0则不自动播放，默认为0；
 			});
-
+			
+			var aniShow;
+			var parentWebView;
+			
 			$.plusReady(function() {
-				
+				parentWebView = plus.webview.currentWebview().parent();
+				aniShow = app.getaniShow();
+				$('.mui-table-view').on('tap', 'a', function() {
+					var id = this.getAttribute('href');
+					var href = this.href;
+					var title = this.innerText;
+					var isBars = false;
+					var barsIcon = '';
+					//检测是否登陆
+					if(!localStorage.getItem('$user')) {
+						href = "login.html";
+						id = "login.html";
+						aniShow = 'slide-in-bottom';
+						title = '登录';
+					}
+					$.fire(parentWebView, 'newWebView', {
+						id: id,
+						href: href,
+						aniShow: aniShow,
+						title: title,
+						isBars: isBars,
+						barsIcon: barsIcon
+					});
+				});
 			});
 		}(mui, document));
 	</script>

@@ -430,7 +430,8 @@
 					"css/style.css",
 					"fonts/iconfont.ttf",
 					"js/load.js",
-					"js/md5.js"
+					"js/md5.js",
+					"img/user.jpg"
 				],
 				"refer": [],
 				"priority": 0
