@@ -309,7 +309,8 @@
 					"js/app.js",
 					"tab-webview-subpage-about.html",
 					"js/load.js",
-					"js/md5.js"
+					"js/md5.js",
+					"css/style.css"
 				],
 				"refer": [
 					"guide.html",
@@ -319,7 +320,11 @@
 					"tab-webview-subpage-setting.html",
 					"tab-webview-subpage-chat.html",
 					"tab-webview-subpage-contact.html",
-					"tab-webview-subpage-user.html"
+					"tab-webview-subpage-user.html",
+					"userHtml/user-info.html",
+					"tab-webview-user.html",
+					"tab-webview-home.html",
+					"tab-webview-setting.html"
 				],
 				"priority": 0
 			},
@@ -380,6 +385,50 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
+					"js/load.js",
+					"js/md5.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tab-webview-home.html": {
+				"resources": [
+					"images/lb-2.png",
+					"images/lb-1.png",
+					"css/iconfont.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tab-webview-setting.html": {
+				"resources": [
+					"images/applogo.png",
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/load.js",
+					"js/md5.js",
+					"img/bg-960_720.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tab-webview-user.html": {
+				"resources": [
+					"img/bg-960_720.png",
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
 					"js/load.js",
 					"js/md5.js"
 				],

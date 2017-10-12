@@ -3,18 +3,12 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title></title>
+		<title>首页</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-
 		<link rel="stylesheet" href="css/mui.min.css">
-		<style>
-			html,
-			body {
-				background-color: #efeff4;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
 	</head>
 
 	<body>
@@ -22,15 +16,15 @@
 			<h1 id="title" class="mui-title">首页</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab">
-			<a id="defaultTab" class="mui-tab-item mui-active" href="tab-webview-subpage-home.html">
+			<a id="defaultTab" class="mui-tab-item mui-active" href="tab-webview-home.html">
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">首页</span>
 			</a>
-			<a id="userTab" class="mui-tab-item" href="tab-webview-subpage-user.html">
+			<a id="userTab" class="mui-tab-item" href="tab-webview-user.html">
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">个人中心</span>
 			</a>
-			<a id="setTab" class="mui-tab-item" href="tab-webview-subpage-setting.html">
+			<a id="setTab" class="mui-tab-item" href="tab-webview-setting.html">
 				<span class="mui-icon mui-icon-gear"></span>
 				<span class="mui-tab-label">设置</span>
 			</a>
@@ -48,7 +42,7 @@
 			var navtitle;
 			//当前激活选项
 			var curTabItem;
-			var barItemUrl = ['tab-webview-subpage-home.html', 'tab-webview-subpage-user.html', 'tab-webview-subpage-setting.html'];
+			var barItemUrl = ['tab-webview-home.html', 'tab-webview-user.html', 'tab-webview-setting.html'];
 			//每个tabitem所对应显示的页面对象
 			var barItemWebView = {};
 
@@ -180,66 +174,21 @@
 								loginWebView.show(aniShow);
 							}, false); //loaded 页面加载完成
 						}
-					} else if(id == 'Home/product-detail-needtem.html') {
-						console.log("111111")
-						var productID = options.detail.product_id;
-						mui.fire(detailTem, 'detailTemplate', {
-							id: id,
-							aniShow: aniShow,
-							target: href,
-							product_id: productID
-						});
-
-						if(mui.os.ios || (mui.os.android && parseFloat(mui.os.version) < 4.4)) {
-							detailsub.loadURL(id);
-							detailTem.show(aniShow);
-						}
 					} else if(~id.indexOf('.html')) {
-						if(!~id.indexOf('needtem.html')) {
-							console.log("22222222222")
-							mui.openWindow({
-								url: href,
-								id: id,
-								styles: {
-									popGesture: 'close'
-								},
-								show: {
-									aniShow: aniShow
-								},
-								waiting: {
-									autoShow: false
-								}
-							}); //在Jquery里面，有用到比如if(!~this.className.indexOf(str)){ //do some thing…..};这里，对于this.className.indexOf(str)的返回值，要么大于-1，要么就是等于-1；在其等于-1的时候，~-1===0；然后，!~-1===true;那么就可以得出this不包含str这个class名…； 
-						} else {
-							console.log("333333")
-							//headerWebView.hide();如果在这里添加这个代码，会导致监听事件在下面contentwebview show之后又隐藏掉它
-							contentWebView.hide();
-							//像template-main传送事件让他更改标题
-							mui.fire(headerWebView, 'templateFire', {
-								id: id,
-								title: title,
-								aniShow: aniShow,
-								target: href,
-								isBars: isBars,
-								barsIcon: barsIcon
-							});
-
-							//如果为展示category或者商品信息的页面，需要每次都重新加载，因为存在刷新页面信息的东西;
-							//再次加载页面显示的也是之前加载的页面信息，所以这里，在这个页面返回的时候将里面的数据清空
-							if(mui.os.ios || (mui.os.android && parseFloat(mui.os.version) < 4.4)) {
-								var str = contentWebView.getURL();
-								var index = str.indexOf('www/');
-								str = str.substring(index + 4);
-								if((!~id.indexOf('category-detail') && !~id.indexOf('goods-detail')) && (contentWebView.getURL() == href || str == href)) {
-									console.log("loaded");
-									contentWebView.show();
-								} else {
-									console.log("new load");
-									contentWebView.loadURL(href);
-								}
-								headerWebView.show(aniShow, 150);
+						//在Jquery里面，有用到比如if(!~this.className.indexOf(str)){ //do some thing…..};这里，对于this.className.indexOf(str)的返回值，要么大于-1，要么就是等于-1；在其等于-1的时候，~-1===0；然后，!~-1===true;那么就可以得出this不包含str这个class名…；
+						mui.openWindow({
+							url: href,
+							id: id,
+							styles: {
+								popGesture: 'close'
+							},
+							show: {
+								aniShow: aniShow
+							},
+							waiting: {
+								autoShow: false
 							}
-						}
+						}); 
 					}
 				}, false);
 			}

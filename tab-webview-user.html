@@ -11,42 +11,6 @@
 		<link rel="stylesheet" href="css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
-		<style>
-			.xs-head-img {
-				padding: 16% 0px 16% 0px;
-				background: url(img/bg-960_720.png);
-				background-position: center center;
-				background-size: 100% auto;
-			}
-			
-			.xs-user {
-				text-align: center;
-			}
-			
-			.xs-user div {
-				width: 4em;
-				height: 4em;
-				padding: 0px;
-				border: 2px solid white;
-				border-radius: 50%;
-				color: gray;
-				margin: 0px auto;
-				margin-bottom: 5px;
-			}
-			
-			.xs-user img {
-				width: 100%;
-				height: 100%;
-			}
-			
-			.xs-d-info {
-				margin-top: 10px;
-			}
-			
-			.xs-d-info .mui-table-view-cell span {
-				margin: 0 8px
-			}
-		</style>
 	</head>
 
 	<body>
@@ -93,7 +57,7 @@
 	<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		mui.init({
-			swipeBack: true //启用右滑关闭功能
+			swipeBack: false //启用右滑关闭功能
 		});
 
 		var aniShow;
@@ -104,11 +68,6 @@
 			parentWebView = plus.webview.currentWebview().parent();
 			aniShow = app.getaniShow();
 			touxiangimg = document.getElementById('touxiangimg');
-
-			//检测是否已经登录
-			if(localStorage.getItem('$user')) {
-
-			}
 
 			mui('.mui-table-view').on('tap', 'a', function() {
 				var id = this.getAttribute('href');
@@ -122,16 +81,15 @@
 					id = "login.html";
 					aniShow = 'slide-in-bottom';
 					title = '登录';
-
-					mui.fire(parentWebView, 'newWebView', {
-						id: id,
-						href: href,
-						aniShow: aniShow,
-						title: title,
-						isBars: isBars,
-						barsIcon: barsIcon
-					});
 				}
+				mui.fire(parentWebView, 'newWebView', {
+					id: id,
+					href: href,
+					aniShow: aniShow,
+					title: title,
+					isBars: isBars,
+					barsIcon: barsIcon
+				});
 			});
 
 			touxiangimg.addEventListener('tap', function() {
@@ -152,6 +110,18 @@
 						barsIcon: barsIcon
 					});
 				}
+			}, false);
+
+			//接收登录成功事件
+			window.addEventListener('loginSuccess', function() {
+				//登出按钮显示出来 头像图片显示出来名字显示出来
+				/*touxiangimg.style.display = 'none';
+				trueimg.style.display = 'inline';
+				var user = JSON.parse(localStorage.getItem('user'));
+				//				trueimg.src = user.website_logo; 
+				trueimg.src = '../img/touxiang.jpg';
+				touxiangword.innerText = user.website_name;
+				touxiangword.style.color = 'black';*/
 			}, false);
 		});
 	</script>

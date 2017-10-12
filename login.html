@@ -93,7 +93,9 @@
 					//登录成功,向需要的页面发送消息事件通知已经登录做响应的处理
 					loginWebview.addEventListener('hide', function() {
 						var homeView = plus.webview.getLaunchWebview();
-						var setView = plus.webview.getWebviewById("tab-webview-subpage-setting.html");
+						var userView = plus.webview.getWebviewById('tab-webview-user.html');
+						var setView = plus.webview.getWebviewById('tab-webview-setting.html');
+						$.fire(userView, 'loginSuccess', {});
 						$.fire(setView, 'loginSuccess', {});
 						loginWebview.close();
 					})
