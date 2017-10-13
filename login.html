@@ -82,7 +82,7 @@
 								plus.nativeUI.toast(err);
 								return;
 							}
-							mui.back();
+							loginSuccess();
 						});
 					}, false);
 
@@ -98,7 +98,8 @@
 						$.fire(userView, 'loginSuccess', {});
 						$.fire(setView, 'loginSuccess', {});
 						loginWebview.close();
-					})
+					}, false);
+
 					//注册
 					regButton.addEventListener('tap', function(event) {
 						$.openWindow({
@@ -136,6 +137,25 @@
 					}, false);
 				});
 			}(mui, document));
+
+			function loginSuccess(data) {
+				console.log(11);
+				//将用户信息和account分开存放是有好处的
+				if('000000' == data.code) {
+					var user = {
+						website_name: data.website_name,
+						website_logo: data.website_logo,
+						website_grade: data.website_grade,
+						website_id: data.website_id
+					}
+					//将两个数据存放起来，第一个是退出之后删除，第二个只要登录之后就会记录保存
+					localStorage.setItem('user', JSON.stringify(user));
+					localStorage.setItem('account', data.account);
+					mui.back();
+					mui.toast('登录成功');
+				}
+				console.log(111);
+			}
 		</script>
 	</body>
 

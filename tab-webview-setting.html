@@ -73,6 +73,7 @@
 			</div>
 		</div>
 	</body>
+	<script src="js/md5.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/mui.min.js"></script>
 	<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
 	<script>
@@ -83,9 +84,9 @@
 		mui.plusReady(function() {
 			logoutBtn = document.getElementById("exit");
 			//检测是否已经登录
-			if (!localStorage.getItem('$user')) {
+			if(!localStorage.getItem('$user')) {
 				logoutBtn.style.display = 'none';
-			}else {
+			} else {
 				logoutBtn.style.display = 'block';
 			}
 			logoutBtn.addEventListener('tap', function() {
@@ -116,23 +117,35 @@
 					switch(index) {
 						case 1:
 							//注销账号
-							//app.setAccount({});
-							localStorage.removeItem('$user');
-							logoutBtn.style.display = 'none';
-							mui.toast('退出登录成功');
+							app.logout({}, function(err) {
+								if(err) {
+									plus.nativeUI.toast(err);
+									return;
+								}
+								logoutSuccess();
+							});
 							break;
 						case 2:
 							plus.runtime.quit();
 							break;
 					}
 				});
-
 			}, false);
+
+			function logoutSuccess() {
+				localStorage.removeItem('$user');
+				logoutBtn.style.display = 'none';
+				// 向需要的页面发送消息事件通知已经注销做响应的处理
+				var userView = plus.webview.getWebviewById('tab-webview-user.html');
+				mui.fire(userView, 'logoutSuccess', {});
+				
+				mui.toast('退出登录成功');
+			}
 			//接收登录成功事件
-			window.addEventListener('loginSuccess',function(){
+			window.addEventListener('loginSuccess', function() {
 				//登出按钮显示出来 头像图片显示出来名字显示出来
 				logoutBtn.style.display = 'block';
-			},false);
+			}, false);
 		});
 	</script>
 

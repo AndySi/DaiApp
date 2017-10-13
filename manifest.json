@@ -400,7 +400,8 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"css/style.css",
-					"fonts/iconfont.ttf"
+					"fonts/iconfont.ttf",
+					"js/app.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -444,7 +445,11 @@
 					"fonts/mui.ttf",
 					"css/iconfont.css",
 					"css/mui.min.css",
-					"css/style.css"
+					"css/style.css",
+					"js/mui.poppicker.js",
+					"js/mui.picker.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.css"
 				],
 				"refer": [],
 				"priority": 0

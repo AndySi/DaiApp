@@ -86,13 +86,12 @@
 			if(!localStorage.getItem('$user')) {
 				trueimg.style.display = 'none';
 				touxiangimg.style.display = 'inline';
-				touxiangword.style.color = 'indianred';
 			} else {
 				trueimg.style.display = 'inline';
 				touxiangimg.style.display = 'none';
 				var user = JSON.parse(localStorage.getItem('$user'));
 				trueimg.src = 'img/user.jpg';
-				touxiangword.innerText = user.nickname;
+				touxiangword.innerText = user.account;
 				touxiangword.style.color = 'black';
 			}
 
@@ -143,10 +142,18 @@
 			window.addEventListener('loginSuccess', function() {
 				touxiangimg.style.display = 'none';
 				trueimg.style.display = 'inline';
-				var user = JSON.parse(localStorage.getItem('user'));
+				var user = JSON.parse(localStorage.getItem('$user'));
 				trueimg.src = 'img/user.jpg';
-				touxiangword.innerText = user.nickname;
+				touxiangword.innerText = user.account;
 				touxiangword.style.color = 'black';
+			}, false);
+			
+			//接收注销成功事件
+			window.addEventListener('logoutSuccess', function(){
+				trueimg.style.display = 'none';
+				touxiangimg.style.display = 'inline';
+				touxiangword.innerText = '点击登录';
+				touxiangword.style.color = '#FFF';
 			}, false);
 		});
 	</script>

@@ -36,9 +36,10 @@ function getSign(params) {
  * @param {Object} params
  */
 function getReqData(params) {
+	params = params || {};
 	var data = {
 		appkey: app_key, //appID
-		params: params, //Json字符串
+		params: JSON.stringify(params), //Json字符串
 		timestamp: getTimestamp(), //时间戳
 		digest: getSign(params), //签名摘要
 		version: v //app版本
@@ -65,7 +66,6 @@ function getReqData(params) {
 			return callback('请输入有效的手机号码');
 		}
 
-		plus.nativeUI.toast('登录成功');
 		return owner.createUser(loginInfo, callback);
 
 		/*$.ajax("http://localhost:8080/", {
@@ -121,6 +121,27 @@ function getReqData(params) {
 		return JSON.parse(userInfo);
 	};
 
+	/**
+	 * 退出登录
+	 */
+	owner.logout = function(options, callback){
+		callback = callback || $.noop;
+		var data = getReqData()
+//		mui.ajax(httpUrl,{
+//			data:data,
+//			dataType:'json',//服务器返回json格式数据
+//			type:'get',//HTTP请求类型
+//			timeout:10000,//超时时间设置为10秒；
+//			success:function(data){
+//				logData(data);
+//				logoutSuccess(data);
+//			},
+//			error:function(xhr,type,errorThrown){
+//				
+//			}
+//		});
+		return callback();
+	}
 	/**
 	 * 新用户注册
 	 **/
