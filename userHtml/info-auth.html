@@ -7,43 +7,64 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
-		<link rel="stylesheet" type="text/css" href="../css/style.css" />
 		<style>
+			html,
+			body {
+				background: #FFF;
+			}
+			
+			ul,
+			li {
+				margin: 0px;
+				padding: 0px;
+			}
+			
 			#progressbar {
 				overflow: hidden;
+				margin: 10px auto;
 				/*CSS counters to number the steps*/
-				counter-reset: step;
 			}
 			
 			#progressbar li {
 				list-style-type: none;
 				width: 33.33%;
 				float: left;
+				font-size: 14px;
 				position: relative;
 			}
 			
 			#progressbar li:before {
-				content: counter(step);
-				counter-increment: step;
+				content: '';
 				width: 30px;
 				height: 30px;
+				line-height: 30px;
+				font-size: 11px;
+				font-weight: bold;
 				display: block;
-				color: #333;
+				color: #3399ff;
 				background: white;
+				border: 1px #3399ff solid;
 				border-radius: 100%;
-				margin: 0 auto 5px auto;
-				
+				margin: 0 auto 1px auto;
+			}
+			
+			#progressbar li:nth-child(2):before {
+				content: '50%';
+			}
+			
+			#progressbar li:nth-child(3):before {
+				content: '100%';
 			}
 			/*progressbar connectors*/
 			
 			#progressbar li:after {
 				content: '';
-				width: 100%;
+				width: 74%;
 				height: 2px;
-				background: white;
+				background: #3399ff;
 				position: absolute;
-				left: -60%;
-				top: 9px;
+				left: -37%;
+				top: 15px;
 			}
 			
 			#progressbar li:first-child:after {
@@ -52,30 +73,141 @@
 			
 			#progressbar li.active:before,
 			#progressbar li.active:after {
-				border-radius: 100%;
 				background: #3399ff;
-				color: white;
+			}
+			
+			.mui-content {
+				background-color: #FFF;
+			}
+			
+			.mui-input-row label {
+				width: 36%;
+			}
+			
+			.mui-input-row label~input {
+				width: 64%;
+			}
+			
+			.mui-input-group .mui-input-row {
+				color: #8f8f94;
+				font-size: 12px;
+			}
+			
+			.mui-input-group .mui-input-row input {
+				font-size: 12px;
+			}
+			
+			::-webkit-input-placeholder {
+				font-size: 12px;
+			}
+			
+			.mui-btn {
+				background: #3399ff;
+				padding: 8px;
 			}
 		</style>
 	</head>
 
 	<body>
-		<header id="header" class="mui-bar mui-bar-nav xs-color-blue">
+		<header id="header" class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">信用认证</h1>
 		</header>
-		<div class="mui-content" style="text-align: center;">
-			<ul id="progressbar">
-				<li class="active">联系方式</li>
-				<li class="active">身份认证</li>
-				<li>信用认证</li>
-			</ul>
+		<div class="mui-content">
+			<!-- progressbar -->
+			<div style="text-align: center;">
+				<ul id="progressbar">
+					<li class="active">联系方式</li>
+					<li>身份认证</li>
+					<li>信用认证</li>
+				</ul>
+			</div>
+			<!-- step -->
+			<div class="mui-content-padded" style="margin: 5px;">
+				<p style="margin: 6px auto;">联系方式</p>
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>借款本人手机号：</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入手机号（必填）">
+					</div>
+					<div class="mui-input-row">
+						<label>手机服务密码：</label>
+						<input type="text" class="mui-input-clear" placeholder="手机服务密码（必填）">
+					</div>
+					<div class="mui-input-row">
+						<label>支付宝帐号：</label>
+						<input type="text" class="mui-input-clear" placeholder="支付宝帐号（必填）">
+					</div>
+					<div class="mui-input-row">
+						<label>联系QQ：</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入QQ号（必填）">
+					</div>
+				</form>
+				<p style="margin: 6px auto;">关系人 <span class="mui-icon mui-icon mui-icon-personadd"></span></p>
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>姓名：</label>
+						<input type="text" class="mui-input-clear" disabled placeholder="关系人姓名（必填）">
+					</div>
+					<div class="mui-input-row">
+						<label>联系方式：</label>
+						<input type="text" class="mui-input-clear" disabled placeholder="关系人手机号（必填）">
+					</div>
+				</form>
+				<p style="margin: 6px auto;">常用联系人 <span class="mui-icon mui-icon mui-icon-personadd"></span></p>
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>姓名：</label>
+						<input type="text" class="mui-input-clear" disabled placeholder="联系人姓名（必填）">
+					</div>
+					<div class="mui-input-row">
+						<label>联系方式：</label>
+						<input type="text" class="mui-input-clear" disabled placeholder="联系人手机号（必填）">
+					</div>
+				</form>
+				<div style="text-align: center;margin: 10px auto;font-size: 13px;color: #8f8f94;">请确认以上信息准确无误!</div>
+				<button name="1" class="mui-btn mui-btn-block mui-btn-primary">下一步</button>
+			</div>
+			<div class="mui-content-padded mui-hidden">
+				身份认证：
+				<button type="button" name="2" class="mui-btn mui-btn-primary">下一步</button>
+			</div>
+			<div class="mui-content-padded mui-hidden">
+				信用认证：
+				<button>完成</button>
+			</div>
 		</div>
-		
+
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init({
+				swipeBack: false //启用右滑关闭功能
+			})
+
+			mui.plusReady(function() {
+				//下一步操作
+				mui('.mui-content').on('tap', '.mui-content-padded button', function() {
+					// var next_index = Array.prototype.indexOf.call(document.querySelectorAll('.div-step'),this.parentNode.nextElementSibling);
+					this.parentNode.classList.add('mui-hidden');
+					this.parentNode.nextElementSibling.classList.remove('mui-hidden');
+					document.querySelectorAll("#progressbar li")[this.name].classList.add('active');
+				});
+				//访问通讯录
+				mui('.mui-content-padded').on('tap', '.mui-icon', function() {
+					plus.contacts.getAddressBook(plus.contacts.ADDRESSBOOK_PHONE, function(addressbook) {
+						addressbook.find(["displayName", "phoneNumbers"], function(contacts) {
+							alert(contacts.length);
+						}, function() {
+							alert("error");
+						}, {
+							multiple: true
+						});
+					}, function(e) {
+						alert("Get address book failed: " + e.message);
+					})
+				});
+			});
 		</script>
 	</body>
 

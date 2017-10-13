@@ -310,7 +310,8 @@
 					"tab-webview-subpage-about.html",
 					"js/load.js",
 					"js/md5.js",
-					"css/style.css"
+					"css/style.css",
+					"tab-webview-home.html"
 				],
 				"refer": [
 					"guide.html",
@@ -323,8 +324,8 @@
 					"tab-webview-subpage-user.html",
 					"userHtml/user-info.html",
 					"tab-webview-user.html",
-					"tab-webview-home.html",
-					"tab-webview-setting.html"
+					"tab-webview-setting.html",
+					"userHtml/info-auth.html"
 				],
 				"priority": 0
 			},
@@ -432,6 +433,18 @@
 					"js/load.js",
 					"js/md5.js",
 					"img/user.jpg"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"userHtml/info-auth.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0

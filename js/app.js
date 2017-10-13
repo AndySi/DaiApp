@@ -1,4 +1,4 @@
-var md5_element = document.createElement('script');
+/*var md5_element = document.createElement('script');
 md5_element.setAttribute("type", "text/javascript");
 md5_element.setAttribute("src", "js/md5.js"); // 在这里引入了md5.js,md5加密保护
 document.body.appendChild(md5_element);
@@ -6,7 +6,7 @@ document.body.appendChild(md5_element);
 var load_element = document.createElement("script");
 load_element.setAttribute("type", "text/javascript");
 load_element.setAttribute("src", "js/load.js"); // 在这里引入了load.js
-document.body.appendChild(load_element);
+document.body.appendChild(load_element);*/
 
 var v = "v1.0";
 var httpUrl = "http://localhost:8080/idou_dai/router?";
