@@ -130,30 +130,30 @@
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label>借款本人手机号：</label>
-						<input type="text" class="mui-input-clear" placeholder="请输入手机号（必填）">
+						<input id="inp_tel" type="text" class="mui-input-clear" placeholder="请输入手机号（必填）">
 					</div>
 					<div class="mui-input-row">
 						<label>手机服务密码：</label>
-						<input type="text" class="mui-input-clear" placeholder="手机服务密码（必填）">
+						<input id="inp_telpwd" type="text" class="mui-input-clear" placeholder="手机服务密码（必填）">
 					</div>
 					<div class="mui-input-row">
 						<label>支付宝帐号：</label>
-						<input type="text" class="mui-input-clear" placeholder="支付宝帐号（必填）">
+						<input id="inp_alipay" type="text" class="mui-input-clear" placeholder="支付宝帐号（必填）">
 					</div>
 					<div class="mui-input-row">
 						<label>联系QQ：</label>
-						<input type="text" class="mui-input-clear" placeholder="请输入QQ号（必填）">
+						<input id="inp_qq" type="text" class="mui-input-clear" placeholder="请输入QQ号（必填）">
 					</div>
 				</form>
 				<p style="margin: 6px auto;">关系人 <span id="relativeTelPicker" class="mui-icon mui-icon mui-icon-personadd"></span></p>
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label>姓名：</label>
-						<input type="text" class="mui-input-clear" disabled placeholder="关系人姓名（必填）">
+						<input id="inp_party" type="text" class="mui-input-clear" disabled placeholder="关系人姓名（必填）">
 					</div>
 					<div class="mui-input-row">
 						<label>联系方式：</label>
-						<input type="text" class="mui-input-clear" disabled placeholder="关系人手机号（必填）">
+						<input id="inp_partyTel" type="text" class="mui-input-clear" disabled placeholder="关系人手机号（必填）">
 					</div>
 				</form>
 				<p style="margin: 6px auto;">常用联系人 <span class="mui-icon mui-icon mui-icon-personadd"></span></p>
@@ -161,11 +161,11 @@
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label>姓名：</label>
-						<input type="text" class="mui-input-clear" disabled placeholder="联系人姓名（必填）">
+						<input id="inp_contacts" type="text" class="mui-input-clear" disabled placeholder="联系人姓名（必填）">
 					</div>
 					<div class="mui-input-row">
 						<label>联系方式：</label>
-						<input type="text" class="mui-input-clear" disabled placeholder="联系人手机号（必填）">
+						<input id="inp_contactTel" type="text" class="mui-input-clear" disabled placeholder="联系人手机号（必填）">
 					</div>
 				</form>
 				<div style="text-align: center;margin: 10px auto;font-size: 13px;color: #8f8f94;">请确认以上信息准确无误!</div>
@@ -196,6 +196,10 @@
 				//下一步操作
 				mui('.mui-content').on('tap', '.mui-content-padded button', function() {
 					// var next_index = Array.prototype.indexOf.call(document.querySelectorAll('.div-step'),this.parentNode.nextElementSibling);
+					if(document.getElementById("inp_tel").length != 11) {
+						mui.toast("借款本人手机号不能为空");
+						return;
+					}
 					this.parentNode.classList.add('mui-hidden');
 					this.parentNode.nextElementSibling.classList.remove('mui-hidden');
 					document.querySelectorAll("#progressbar li")[this.name].classList.add('active');
