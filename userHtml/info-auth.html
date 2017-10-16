@@ -156,7 +156,7 @@
 						<input id="inp_partyTel" type="text" class="mui-input-clear" disabled placeholder="关系人手机号（必填）">
 					</div>
 				</form>
-				<p style="margin: 6px auto;">常用联系人 <span class="mui-icon mui-icon mui-icon-personadd"></span></p>
+				<p style="margin: 6px auto;">常用联系人 <span id="contactsPicker" class="mui-icon mui-icon mui-icon-personadd"></span></p>
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label>姓名：</label>
@@ -164,15 +164,15 @@
 					</div>
 					<div class="mui-input-row">
 						<label>联系方式：</label>
-						<input id="inp_contactTel" type="text" class="mui-input-clear" disabled placeholder="联系人手机号（必填）">
+						<input id="inp_contactsTel" type="text" class="mui-input-clear" disabled placeholder="联系人手机号（必填）">
 					</div>
 				</form>
 				<div style="text-align: center;margin: 10px auto;font-size: 13px;color: #8f8f94;">请确认以上信息准确无误!</div>
-				<button name="1" class="mui-btn mui-btn-block mui-btn-primary">下一步</button>
+				<button id="btn_step1" class="mui-btn mui-btn-block mui-btn-primary">下一步</button>
 			</div>
 			<div class="mui-content-padded mui-hidden">
 				身份认证：
-				<button type="button" name="2" class="mui-btn mui-btn-primary">下一步</button>
+				<button id="btn_step2" type="button" class="mui-btn mui-btn-primary">下一步</button>
 			</div>
 			<div class="mui-content-padded mui-hidden">
 				信用认证：
@@ -189,20 +189,24 @@
 				swipeBack: false //启用右滑关闭功能
 			})
 			mui.plusReady(function() {
-				//关系人
+				//通讯录
 				var telPicker = new mui.PopPicker();
-				//下一步操作
-				mui('.mui-content').on('tap', '.mui-content-padded button', function() {
+				//第一步操作
+				document.getElementById('btn_step1').addEventListener('tap', function() {
 					// var next_index = Array.prototype.indexOf.call(document.querySelectorAll('.div-step'),this.parentNode.nextElementSibling);
-					if(document.getElementById("inp_tel").length != 11) {
-						mui.toast("借款本人手机号不能为空");
-						return;
+					if(validStep1Form()) {
+						this.parentNode.classList.add('mui-hidden');
+						this.parentNode.nextElementSibling.classList.remove('mui-hidden');
+						document.querySelectorAll("#progressbar li")[1].classList.add('active');
 					}
+				});
+				//第二步操作
+				document.getElementById('btn_step2').addEventListener('tap', function() {
 					this.parentNode.classList.add('mui-hidden');
 					this.parentNode.nextElementSibling.classList.remove('mui-hidden');
-					document.querySelectorAll("#progressbar li")[this.name].classList.add('active');
+					document.querySelectorAll("#progressbar li")[2].classList.add('active');
 				});
-				//访问通讯录
+				//添加关系人
 				document.getElementById('relativeTelPicker').addEventListener('tap', function(event) {
 					plus.contacts.getAddressBook(plus.contacts.ADDRESSBOOK_PHONE, function(addressbook) {
 						var telArr = new Array();
@@ -231,7 +235,66 @@
 						alert("Get address book failed: " + e.message);
 					});
 				}, true);
+				//添加联系人
+				document.getElementById('contactsPicker').addEventListener('tap', function(event) {
+					plus.contacts.getAddressBook(plus.contacts.ADDRESSBOOK_PHONE, function(addressbook) {
+						var telArr = new Array();
+						addressbook.find(["displayName", "phoneNumbers"], function(contacts) {
+							for(var i = 0, n = contacts.length; i < n; i++) {
+								var dataObj = new Object();
+								dataObj.text = contacts[i].displayName;
+								if(contacts[i].phoneNumbers.length > 0) {
+									dataObj.value = contacts[i].phoneNumbers[0].value;
+								}
+								telArr[i] = dataObj;
+							}
+							telPicker.setData(telArr);
+							telPicker.show(function(items) {
+								document.getElementById('inp_contacts').value = items[0].text;
+								document.getElementById('inp_contactTel').value = items[0].value;
+								//返回 false 可以阻止选择框的关闭
+								//return false;
+							});
+						}, function() {
+							alert("error");
+						}, {
+							multiple: true
+						});
+					}, function(e) {
+						alert("Get address book failed: " + e.message);
+					});
+				}, true);
 			});
+			/**
+			 * step1表单验证 
+			 */
+			function validStep1Form() {
+				if(document.getElementById("inp_tel").length != 11) {
+					mui.toast("借款本人手机号不能为空");
+					return false;
+				}
+				if(document.getElementById("inp_telpwd").length != 4) {
+					mui.toast("手机服务密码不能为空");
+					return false;
+				}
+				if(!document.getElementById('inp_alipay').value) {
+					mui.toast("支付宝帐号不能为空");
+					return false;
+				}
+				if(document.getElementById('inp_qq').value) {
+					mui.toast("QQ号码不能为空");
+					return false;
+				}
+				if(!document.getElementById('inp_party').value && !document.getElementById('inp_partyTel').value) {
+					mui.toast("关系人不能为空");
+					return false;
+				}
+				if(!document.getElementById('inp_contacts').value && !document.getElementById('inp_contactsTel').value) {
+					mui.toast("常用联系人不能为空");
+					return false;
+				}
+				return true;
+			}
 		</script>
 	</body>
 

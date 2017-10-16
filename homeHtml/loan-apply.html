@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>贷款申请</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style>
+			.xs-color-blue {
+				background-color: #3399ff;
+			}
+			
+			.div-calculator {
+				border: 2px #e7e5ec solid;
+				border-top: 4px #cdcad4 solid;
+				width: 84%;
+				margin: 0 auto;
+				background-color: #FFF;
+				overflow: hidden;
+				font-size: 15px;
+			}
+			
+			h4 {
+				font-size: 14px;
+			}
+			
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">贷款申请</h1>
+		</header>
+		<div class="mui-content">
+			<div style="text-align: center;background: #FFF;margin: 20px auto;padding: 10px 0px;">
+				<h4>借款金额：<span id='loan-money-val'>100</span>元</h4>
+				<div class="mui-input-range" style="padding: 0 20px;">
+					<input type="range" id='loan-money' step="100" value="100" min="100" max="10000">
+				</div>
+			</div>
+			<div style="text-align: center;background: #FFF;margin: 20px auto;padding: 10px 0px;">
+				<h4>借款期限：<span id='block-range-val'>1</span>天</h4>
+				<div class="mui-input-range" style="padding: 0 20px;">
+					<input type="range" id='block-range' value="1" min="1" max="365">
+				</div>
+			</div>
+			<div class="div-calculator">
+				<ul style="list-style-type: none;">
+					<li>
+						<div style="width: 50%;float: left;text-align: left;padding: 10px;">
+							总金额：
+						</div>
+						<div style="text-align: right;width: 50%;float: right;padding: 10px">
+							￥500
+						</div>
+					</li>
+					<li>
+						<div style="width: 50%;float: left;text-align: left;padding: 10px;">
+							每日利息：
+						</div>
+						<div style="text-align: right;width: 50%;float: right;padding: 10px">
+							￥500
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="mui-content-padded">
+				<button id="btn_apply" class="mui-btn mui-btn-block xs-color-blue" style="color: #fff;">立即申请</button>
+			</div>
+			<div style="text-align: center;">
+				<p>需要登录并完成资料验证</p>
+			</div>
+		</div>
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: false //关闭右滑关闭功能
+			});
+
+			//监听input事件，获取range的value值，也可以直接element.value获取该range的值
+			var rangeList = document.querySelectorAll('input[type="range"]');
+			for(var i = 0, len = rangeList.length; i < len; i++) {
+				rangeList[i].addEventListener('input', function() {
+					if(this.id.indexOf('field') >= 0) {
+						document.getElementById(this.id + '-input').value = this.value;
+					} else {
+						document.getElementById(this.id + '-val').innerHTML = this.value;
+					}
+				});
+			}
+			mui.plusReady(function() {
+				mui('.mui-content-padded').on('tap', '.mui-btn', function(e) {
+					mui(this).button('loading');
+					setTimeout(function() {
+						mui(this).button('reset');
+					}.bind(this), 2000);
+				});
+			});
+		</script>
+	</body>
+
+</html>

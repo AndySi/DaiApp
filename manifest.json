@@ -325,7 +325,9 @@
 					"userHtml/user-info.html",
 					"tab-webview-user.html",
 					"tab-webview-setting.html",
-					"userHtml/info-auth.html"
+					"userHtml/info-auth.html",
+					"homeHtml/loan-apply.html",
+					"homeHtml/repayment.html"
 				],
 				"priority": 0
 			},
@@ -450,6 +452,16 @@
 					"js/mui.picker.js",
 					"css/mui.poppicker.css",
 					"css/mui.picker.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"homeHtml/loan-apply.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0
