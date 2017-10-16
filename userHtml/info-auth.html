@@ -157,7 +157,6 @@
 					</div>
 				</form>
 				<p style="margin: 6px auto;">常用联系人 <span class="mui-icon mui-icon mui-icon-personadd"></span></p>
-				<div id='telResult' class="ui-alert"></div>
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label>姓名：</label>
@@ -189,10 +188,9 @@
 			mui.init({
 				swipeBack: false //启用右滑关闭功能
 			})
-
 			mui.plusReady(function() {
+				//关系人
 				var telPicker = new mui.PopPicker();
-				var telResult = document.getElementById('telResult');
 				//下一步操作
 				mui('.mui-content').on('tap', '.mui-content-padded button', function() {
 					// var next_index = Array.prototype.indexOf.call(document.querySelectorAll('.div-step'),this.parentNode.nextElementSibling);
@@ -211,25 +209,28 @@
 						addressbook.find(["displayName", "phoneNumbers"], function(contacts) {
 							for(var i = 0, n = contacts.length; i < n; i++) {
 								var dataObj = new Object();
-								dataObj.displayName = contacts[i].displayName;
-								dataObj.phoneNumber = contacts[i].phoneNumbers[0].value;
+								dataObj.text = contacts[i].displayName;
+								if(contacts[i].phoneNumbers.length > 0) {
+									dataObj.value = contacts[i].phoneNumbers[0].value;
+								}
 								telArr[i] = dataObj;
 							}
+							telPicker.setData(telArr);
+							telPicker.show(function(items) {
+								document.getElementById('inp_party').value = items[0].text;
+								document.getElementById('inp_partyTel').value = items[0].value;
+								//返回 false 可以阻止选择框的关闭
+								//return false;
+							});
 						}, function() {
 							alert("error");
 						}, {
 							multiple: true
 						});
-						telPicker.setData(telArr);
-						telPicker.show(function(items) {
-							telResult.innerText = JSON.stringify(items[0]);
-							//返回 false 可以阻止选择框的关闭
-							//return false;
-						});
 					}, function(e) {
 						alert("Get address book failed: " + e.message);
 					});
-				});
+				}, true);
 			});
 		</script>
 	</body>
