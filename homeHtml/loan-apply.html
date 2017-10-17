@@ -85,6 +85,12 @@
 				swipeBack: false //关闭右滑关闭功能
 			});
 
+			mui(document.body).on('tap', '.mui-btn', function(e) {
+				mui(this).button('loading');
+				setTimeout(function() {
+					mui(this).button('reset');
+				}.bind(this), 2000);
+			});
 			//监听input事件，获取range的value值，也可以直接element.value获取该range的值
 			var rangeList = document.querySelectorAll('input[type="range"]');
 			for(var i = 0, len = rangeList.length; i < len; i++) {
@@ -97,12 +103,7 @@
 				});
 			}
 			mui.plusReady(function() {
-				mui('.mui-content-padded').on('tap', '.mui-btn', function(e) {
-					mui(this).button('loading');
-					setTimeout(function() {
-						mui(this).button('reset');
-					}.bind(this), 2000);
-				});
+				
 			});
 		</script>
 	</body>

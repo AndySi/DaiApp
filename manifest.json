@@ -418,7 +418,8 @@
 					"css/style.css",
 					"js/load.js",
 					"js/md5.js",
-					"img/bg-960_720.png"
+					"img/bg-960_720.png",
+					"img/bg_1274x674.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -435,7 +436,8 @@
 					"fonts/iconfont.ttf",
 					"js/load.js",
 					"js/md5.js",
-					"img/user.jpg"
+					"img/user.jpg",
+					"img/bg_1274x674.png"
 				],
 				"refer": [],
 				"priority": 0

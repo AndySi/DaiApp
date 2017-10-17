@@ -132,9 +132,8 @@ body {
 
 .xs-head-img {
 	padding: 16% 0px 16% 0px;
-	background: url(../img/bg-960_720.png);
-	background-position: center center;
-	background-size: 100% auto;
+	background: url(../img/bg_1274x674.png);
+	background-size: cover;
 }
 
 .xs-user {

@@ -11,6 +11,11 @@
 		<link rel="stylesheet" href="css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<style>
+			.bg-blue{
+				filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -24,16 +29,20 @@
 					<span id="touxiangword" style="color: #FFF;">点击登录</span>
 				</div>
 			</div>
-
 			<ul class="mui-table-view xs-d-info">
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="userHtml/info-auth.html">
-						<span class="mui-icon iconfont icon-icon-person-info"></span> 个人信息
+						<span class="mui-icon iconfont icon-icon-person-info"></span> 授信额度
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a id="changeaddress" class="mui-navigate-right" href="#">
-						<span class="mui-icon iconfont icon-edu"></span> 贷款申请流程
+						<span class="mui-icon iconfont icon-jilu"></span> 申请进度
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="changeaddress" class="mui-navigate-right" href="#">
+						<span class="mui-icon iconfont icon-jilu"></span> 我的贷款
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
@@ -45,7 +54,12 @@
 			<ul class="mui-table-view xs-d-info">
 				<li class="mui-table-view-cell">
 					<a id="changeaddress" class="mui-navigate-right" href="#">
-						<span class="mui-icon iconfont icon-bangzhuzhongxin"></span> 帮助中心
+						<span class="mui-icon iconfont icon-edu"></span> 贷款流程
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="changeaddress" class="mui-navigate-right" href="#">
+						<span class="mui-icon iconfont icon-bangzhuzhongxin"></span> 投诉建议
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
