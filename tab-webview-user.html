@@ -12,15 +12,13 @@
 		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<style>
-			.bg-blue{
-				filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6;
-			}
+			
 		</style>
 	</head>
 
 	<body>
 		<div class="mui-content">
-			<div class="xs-head-img">
+			<div class="xs-head-img" style="position: relative;">
 				<div class="xs-user">
 					<div>
 						<span id="touxiangimg" class="mui-icon mui-icon-person" style="font-size: 3.8em; color: white;"></span>
@@ -32,29 +30,29 @@
 			<ul class="mui-table-view xs-d-info">
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="userHtml/info-auth.html">
-						<span class="mui-icon iconfont icon-icon-person-info"></span> 授信额度
+						<span class="mui-icon iconfont icon-shenqingedu"></span> 授信额度
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a id="changeaddress" class="mui-navigate-right" href="#">
-						<span class="mui-icon iconfont icon-jilu"></span> 申请进度
+						<span class="mui-icon iconfont icon-jindu"></span> 申请进度
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a id="changeaddress" class="mui-navigate-right" href="#">
-						<span class="mui-icon iconfont icon-jilu"></span> 我的贷款
+						<span class="mui-icon iconfont icon-edu"></span> 我的贷款
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a id="changeaddress" class="mui-navigate-right" href="#">
-						<span class="mui-icon iconfont icon-jilu"></span> 立即还款
+						<span class="mui-icon iconfont icon-jindutiaoqiandai"></span> 立即还款
 					</a>
 				</li>
 			</ul>
 			<ul class="mui-table-view xs-d-info">
 				<li class="mui-table-view-cell">
 					<a id="changeaddress" class="mui-navigate-right" href="#">
-						<span class="mui-icon iconfont icon-edu"></span> 贷款流程
+						<span class="mui-icon iconfont icon-jilu"></span> 贷款流程
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
@@ -161,9 +159,9 @@
 				touxiangword.innerText = user.account;
 				touxiangword.style.color = 'black';
 			}, false);
-			
+
 			//接收注销成功事件
-			window.addEventListener('logoutSuccess', function(){
+			window.addEventListener('logoutSuccess', function() {
 				trueimg.style.display = 'none';
 				touxiangimg.style.display = 'inline';
 				touxiangword.innerText = '点击登录';

@@ -132,8 +132,7 @@ body {
 
 .xs-head-img {
 	padding: 16% 0px 16% 0px;
-	background: url(../img/bg_1274x674.png);
-	background-size: cover;
+	background-color: #3399FF;
 }
 
 .xs-user {

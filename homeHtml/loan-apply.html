@@ -47,9 +47,9 @@
 				</div>
 			</div>
 			<div style="text-align: center;background: #FFF;margin: 20px auto;padding: 10px 0px;">
-				<h4>借款期限：<span id='block-range-val'>1</span>天</h4>
+				<h4>借款期限：<span id='block-range-val'>1</span>个月</h4>
 				<div class="mui-input-range" style="padding: 0 20px;">
-					<input type="range" id='block-range' value="1" min="1" max="365">
+					<input type="range" id='block-range' value="1" min="1" max="12">
 				</div>
 			</div>
 			<div class="div-calculator">
@@ -75,9 +75,6 @@
 			<div class="mui-content-padded">
 				<button id="btn_apply" class="mui-btn mui-btn-block xs-color-blue" style="color: #fff;">立即申请</button>
 			</div>
-			<div style="text-align: center;">
-				<p>需要登录并完成资料验证</p>
-			</div>
 		</div>
 		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
@@ -86,10 +83,44 @@
 			});
 
 			mui(document.body).on('tap', '.mui-btn', function(e) {
-				mui(this).button('loading');
-				setTimeout(function() {
-					mui(this).button('reset');
-				}.bind(this), 2000);
+				document.getElementById('btn_apply').addEventListener('tap', function() {
+					// 验证是否信用认证
+					mui.alert('贷款申请已成功提交！我们会尽快与您取得联系！', '温馨提示', function() {
+						
+					});
+					//检测是否已经登录
+					if(!localStorage.getItem('$user')) {
+						var id = "login.html";
+						var href = "login.html";
+						var title = '登录';
+						var aniShow = 'slide-in-bottom';
+						var isBars = false;
+						var barsIcon = '';
+
+						mui.fire(parentWebView, 'newWebView', {
+							id: id,
+							href: href,
+							aniShow: aniShow,
+							title: title,
+							isBars: isBars,
+							barsIcon: barsIcon
+						});
+					} else {
+						// 验证是否信用认证
+						var btnArray = ['确定', '取消'];
+						mui.confirm('您还未进行信用认证，请进行信用认证', '提示', btnArray, function(e) {
+							if(e.index == 1) {
+								//确定
+							}
+						})
+						mui(this).button('loading');
+						setTimeout(function() {
+							mui(this).button('reset');
+						}.bind(this), 2000);
+					}
+
+				}, false);
+
 			});
 			//监听input事件，获取range的value值，也可以直接element.value获取该range的值
 			var rangeList = document.querySelectorAll('input[type="range"]');
@@ -103,7 +134,7 @@
 				});
 			}
 			mui.plusReady(function() {
-				
+
 			});
 		</script>
 	</body>

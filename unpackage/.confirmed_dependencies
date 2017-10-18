@@ -61,7 +61,8 @@
 			"tab-webview-setting.html",
 			"userHtml/info-auth.html",
 			"homeHtml/loan-apply.html",
-			"homeHtml/repayment.html"
+			"homeHtml/repayment.html",
+			"homeHtml/loan-record.html"
 		]
 	},
 	"tab-webview-subpage-help.html": {
@@ -190,7 +191,10 @@
 			"js/mui.poppicker.js",
 			"js/mui.picker.js",
 			"css/mui.poppicker.css",
-			"css/mui.picker.css"
+			"css/mui.picker.css",
+			"img/sfz-2.png",
+			"img/sfz-3.png",
+			"img/sfz-1.png"
 		]
 	},
 	"homeHtml/loan-apply.html": {
@@ -199,6 +203,24 @@
 			"js/mui.min.js",
 			"css/mui.min.css",
 			"css/style.css"
+		]
+	},
+	"homeHtml/repayment.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		]
+	},
+	"homeHtml/loan-record.html": {
+		"resources": [
+			"js/mui.pullToRefresh.js",
+			"js/mui.min.js",
+			"js/mui.pullToRefresh.material.js",
+			"fonts/mui.ttf",
+			"css/iconfont.css",
+			"css/mui.min.css",
+			"fonts/iconfont.ttf"
 		]
 	}
 }

@@ -107,6 +107,22 @@
 				background: #3399ff;
 				padding: 8px;
 			}
+			
+			.list-img {
+				width: 100%;
+				height: 120px;
+				background-size: cover;
+				overflow: hidden;
+			}
+			
+			.xs-div-card {
+				border: 1px #8f8f94 dashed;
+				border-radius: 5px;
+				height: 80%;
+				text-align: center;
+				line-height: 100px;
+				color: #FFB400;
+			}
 		</style>
 	</head>
 
@@ -124,8 +140,8 @@
 					<li>信用认证</li>
 				</ul>
 			</div>
-			<!-- step -->
-			<div class="mui-content-padded" style="margin: 5px;">
+			<!-- step1 -->
+			<div class="mui-content-padded mui-hidden" style="margin: 5px;">
 				<p style="margin: 6px auto;">联系方式</p>
 				<form class="mui-input-group">
 					<div class="mui-input-row">
@@ -170,9 +186,61 @@
 				<div style="text-align: center;margin: 10px auto;font-size: 13px;color: #8f8f94;">请确认以上信息准确无误!</div>
 				<button id="btn_step1" class="mui-btn mui-btn-block mui-btn-primary">下一步</button>
 			</div>
-			<div class="mui-content-padded mui-hidden">
-				身份认证：
-				<button id="btn_step2" type="button" class="mui-btn mui-btn-primary">下一步</button>
+			<!-- step2 -->
+			<div class="mui-content-padded xs-div-step2" style="margin: 5px;">
+				<p style="margin: 6px auto;">为完善您的资产安全，请如实填写</p>
+				<div id="list-img" class="list-img">
+					<div style="height: 100%;width: 45%;float: left;margin-left: 10px;">
+						<div class="xs-div-card">
+							点击上传
+						</div>
+						<div style="text-align: center;margin-top: 5px;">
+							<h5>身份证正面照片</h5>
+						</div>
+					</div>
+					<div style="height: 100%;width: 45%;float: right;margin-right: 10px;">
+						<div style="background: url(../img/sfz-1.png);background-size: cover;height: 80%;width: 100%;">
+						</div>
+						<div style="text-align: center;margin-top: 5px;">
+							<h5>照片范例</h5>
+						</div>
+					</div>
+				</div>
+				<div class="list-img" style="margin-top: 16px;">
+					<div style="height: 100%;width: 45%;float: left;margin-left: 10px;">
+						<div class="xs-div-card">
+							点击上传
+						</div>
+						<div style="text-align: center;margin-top: 5px;">
+							<h5>身份证反面照片</h5>
+						</div>
+					</div>
+					<div style="height: 100%;width: 45%;float: right;margin-right: 10px;">
+						<div style="background: url(../img/sfz-2.png);background-size: cover;height: 80%;width: 100%;">
+						</div>
+						<div style="text-align: center;margin-top: 5px;">
+							<h5>照片范例</h5>
+						</div>
+					</div>
+				</div>
+				<div class="list-img" style="margin-top: 16px;margin-bottom: 20px;">
+					<div style="height: 100%;width: 45%;float: left;margin-left: 10px;">
+						<div class="xs-div-card">
+							点击上传
+						</div>
+						<div style="text-align: center;margin-top: 5px;">
+							<h5>手持身份证照片</h5>
+						</div>
+					</div>
+					<div style="height: 100%;width: 45%;float: right;margin-right: 10px;">
+						<div style="background: url(../img/sfz-3.png);background-size: cover;height: 80%;width: 100%;">
+						</div>
+						<div style="text-align: center;margin-top: 5px;">
+							<h5>照片范例</h5>
+						</div>
+					</div>
+				</div>
+				<button id="btn_step2" class="mui-btn mui-btn-block mui-btn-primary">下一步</button>
 			</div>
 			<div class="mui-content-padded mui-hidden">
 				信用认证：
@@ -264,6 +332,36 @@
 						alert("Get address book failed: " + e.message);
 					});
 				}, true);
+				// 点击上传图片
+				mui('.xs-div-step2').on('tap', '.list-img .xs-div-card', function() {
+					var size = null;
+					var self = this;
+					plus.gallery.pick(function(e) {
+						var name = e.substr(e.lastIndexOf('/') + 1);
+						console.log("name:" + name);
+						
+						plus.zip.compressImage({
+							src: e,
+							dst: '_doc/' + name,
+							overwrite: true,
+							quality: 50
+						}, function(zip) {
+							size += zip.size
+							console.log("filesize:" + zip.size + ",totalsize:" + size);
+							if(size > (10 * 1024 * 1024)) {
+								return mui.toast('文件超大,请重新选择');
+							}
+							self.innerHTML = '<img src="'+zip.target+'" style="width:100%;height:100%;" />'
+						}, function(zipe) {
+							mui.toast('压缩失败！')
+						});
+					}, function(e) {
+						mui.toast(e.message);
+					}, {
+						filter: "image",
+						multiple: false
+					});
+				});
 			});
 			/**
 			 * step1表单验证 
