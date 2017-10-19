@@ -78,7 +78,7 @@
 		"Webview": {},
 		"NativeUI": {},
 		"Navigator": {},
-		"NativeObj": {},"Device":{},"Contacts":{},"Geolocation":{},"Zip":{},"Camera":{}
+		"NativeObj": {},"Device":{},"Contacts":{},"Geolocation":{},"Zip":{},"Camera":{},"Payment":{}
 	},
 	"plus": {
 		"splashscreen": {
@@ -476,7 +476,10 @@
 				"resources": [
 					"js/mui.min.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/beecloud.js",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [],
 				"priority": 0
