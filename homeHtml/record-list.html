@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+	</head>
+
+	<body>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="xs-wrapper">
+					<div class="mui-card" v-for="item in items">
+						<div class="mui-card-header">
+							<span class="mui-icon iconfont icon-jilu" style="color: #007AFF;font-size: 16px;"> 20171017</span>
+							<h5 style="color: #FFB400;font-weight: bold;">审核通过</h5>
+						</div>
+						<div class="mui-card-content">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell">
+									贷款金额<span style="float: right;">{{item.loanMoney}}</span>
+								</li>
+								<li class="mui-table-view-cell">
+									贷款期限<span style="float: right;">{{item.loanTerm}}天</span>
+								</li>
+								<li class="mui-table-view-cell">
+									审批贷款期限<span style="float: right;">{{item.passTerm}}天</span>
+								</li>
+								<li class="mui-table-view-cell">
+									贷款用途<span style="float: right;">{{item.loanPurpose}}</span>
+								</li>
+							</ul>
+						</div>
+						<div class="mui-card-footer">
+							<h5>申请日期：2017-10-11</h5>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/load.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			var records = new Vue({
+				el: '#pullrefresh',
+				data: {
+					reqParam: {},
+					items: [] //列表信息流数据
+				}
+			});
+
+			var lastId = ''; //最新纪录的id
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				if(window.plus && plus.networkinfo.getCurrentType() === plus.networkinfo.CONNECTION_NONE) {
+					plus.nativeUI.toast('似乎已断开与互联网的连接', {
+						verticalAlign: 'top'
+					});
+					return;
+				}
+				if(lastId) { //说明已有数据，目前处于下拉刷新，增加时间戳，触发服务端立即刷新，返回最新数据
+					records.reqParam.lastId = lastId;
+					records.reqParam.time = new Date().getTime() + "";
+				}
+				//请求列表信息流
+				mui.getJSON("http://spider.dcloud.net.cn/api/news", records.reqParam, function(rsp) {
+					mui('.xs-wrapper').pullRefresh().endPulldown();
+					if(rsp && rsp.length > 0) {
+						lastId = rsp[0].id; //保存最新消息的id，方便下拉刷新时使用
+						records.items = convert(rsp).concat(news.items);
+					}
+				});
+				/*setTimeout(function() {
+					var wrapper = document.querySelector('.xs-wrapper');
+					wrapper.insertBefore(createFragment(3), wrapper.firstChild);
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1500);*/
+			}
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+					document.querySelector('.xs-wrapper').appendChild(createFragment(3));
+				}, 1500);
+			}
+
+			function createFragment(count) {
+				var fragment = document.createDocumentFragment();
+				var div;
+				for(var i = 0; i < count; i++) {
+					div = document.createElement('div');
+					div.className = 'mui-card';
+					div.innerHTML = '<div class="mui-card-header">' +
+						'<span class="mui-icon iconfont icon-jilu" style="color: #007AFF;font-size: 16px;"> 20171017</span>' +
+						'<h5 style="color: #FFB400;font-weight: bold;">审核通过</h5>' +
+						'</div>' +
+						'<div class="mui-card-content">' +
+						'<ul class="mui-table-view">' +
+						'<li class="mui-table-view-cell">' +
+						'申请金额<span style="float: right;">1000</span>' +
+						'</li>' +
+						'<li class="mui-table-view-cell">' +
+						'贷款期限<span style="float: right;">30天</span>' +
+						'</li>' +
+						'<li class="mui-table-view-cell">' +
+						'审批贷款期限<span style="float: right;">30天</span>' +
+						'</li>' +
+						'<li class="mui-table-view-cell">' +
+						'贷款用途<span style="float: right;">请客</span>' +
+						'</li>' +
+						'</ul>' +
+						'</div>' +
+						'<div class="mui-card-footer">' +
+						'<h5>申请日期：2017-10-11</h5>' +
+						'</div>';
+					fragment.appendChild(div);
+				}
+				return fragment;
+			}
+			//			if (mui.os.plus) {
+			//				mui.plusReady(function() {
+			//					setTimeout(function() {
+			//						mui('#pullrefresh').pullRefresh().pullupLoading();
+			//					}, 10);
+			//
+			//				});
+			//			} else {
+			//				mui.ready(function() {
+			//					mui('#pullrefresh').pullRefresh().pullupLoading();
+			//				});
+			//			}
+		</script>
+	</body>
+
+</html>

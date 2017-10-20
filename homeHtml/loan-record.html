@@ -1,324 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="utf-8">
 		<title></title>
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
-		<style>
-			.mui-bar~.mui-content .mui-fullscreen {
-				top: 44px;
-				height: auto;
-			}
-			
-			.mui-control-content .mui-loading {
-				margin-top: 50px;
-			}
-			
-			.mui-pull-top-tips {
-				position: absolute;
-				top: -20px;
-				left: 50%;
-				margin-left: -25px;
-				width: 40px;
-				height: 40px;
-				border-radius: 100%;
-				z-index: 1;
-			}
-			
-			.mui-bar~.mui-pull-top-tips {
-				top: 24px;
-			}
-			
-			.mui-pull-top-wrapper {
-				width: 42px;
-				height: 42px;
-				display: block;
-				text-align: center;
-				background-color: #efeff4;
-				border: 1px solid #ddd;
-				border-radius: 25px;
-				background-clip: padding-box;
-				box-shadow: 0 4px 10px #bbb;
-				overflow: hidden;
-			}
-			
-			.mui-pull-top-tips.mui-transitioning {
-				-webkit-transition-duration: 200ms;
-				transition-duration: 200ms;
-			}
-			
-			.mui-pull-top-tips .mui-pull-loading {
-				/*-webkit-backface-visibility: hidden;
-				-webkit-transition-duration: 400ms;
-				transition-duration: 400ms;*/
-				margin: 0;
-			}
-			
-			.mui-pull-top-wrapper .mui-icon,
-			.mui-pull-top-wrapper .mui-spinner {
-				margin-top: 7px;
-			}
-			
-			.mui-pull-top-wrapper .mui-icon.mui-reverse {
-				/*-webkit-transform: rotate(180deg) translateZ(0);*/
-			}
-			
-			.mui-pull-bottom-tips {
-				text-align: center;
-				background-color: #efeff4;
-				font-size: 15px;
-				line-height: 40px;
-				color: #777;
-			}
-			
-			.mui-pull-top-canvas {
-				overflow: hidden;
-				background-color: #fafafa;
-				border-radius: 40px;
-				box-shadow: 0 4px 10px #bbb;
-				width: 40px;
-				height: 40px;
-				margin: 0 auto;
-			}
-			
-			.mui-pull-top-canvas canvas {
-				width: 40px;
-			}
-			
-			.mui-slider-indicator.mui-segmented-control {
-				background-color: #efeff4;
-			}
-		</style>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">我的贷款</h1>
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">贷款记录</h1>
 		</header>
-		<div class="mui-content">
-			<div id="slider" class="mui-slider mui-fullscreen">
-				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item" href="#item1mobile">
-						全部
-					</a>
-					<a class="mui-control-item" href="#item2mobile">
-						未审核
-					</a>
-					<a class="mui-control-item" href="#item3mobile">
-						已审核
-					</a>
-				</div>
-				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
-				<div class="mui-slider-group">
-					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
-						<div class="mui-scroll-wrapper">
-							<div class="mui-scroll">
-								<div class="mui-card">
-									<div class="mui-card-header">
-										<span class="mui-icon iconfont icon-jilu" style="color: #007AFF;font-size: 16px;"> 20171017</span>
-										<h5 style="color: #FFB400;font-weight: bold;">审核中</h5>
-									</div>
-									<div class="mui-card-content">
-										<ul class="mui-table-view">
-											<li class="mui-table-view-cell">
-												申请金额<span style="float: right;">1000</span>
-											</li>
-											<li class="mui-table-view-cell">
-												贷款期限<span style="float: right;">30天</span>
-											</li>
-											<li class="mui-table-view-cell">
-												审批贷款期限<span style="float: right;">30天</span>
-											</li>
-											<li class="mui-table-view-cell">
-												贷款用途<span style="float: right;">请客</span>
-											</li>
-										</ul>
-									</div>
-									<div class="mui-card-footer">
-										<h5>申请日期：2017-10-11</h5>
-									</div>
-								</div>
-
-								<div class="mui-card">
-									<div class="mui-card-header">
-										<span class="mui-icon iconfont icon-jilu" style="color: #007AFF;font-size: 16px;"> 20171017</span>
-										<h5 style="color: #FFB400;font-weight: bold;">审核中</h5>
-									</div>
-									<div class="mui-card-content">
-										<ul class="mui-table-view">
-											<li class="mui-table-view-cell">
-												申请金额<span style="float: right;">1000</span>
-											</li>
-											<li class="mui-table-view-cell">
-												贷款期限<span style="float: right;">30天</span>
-											</li>
-											<li class="mui-table-view-cell">
-												审批贷款期限<span style="float: right;">30天</span>
-											</li>
-											<li class="mui-table-view-cell">
-												贷款用途<span style="float: right;">请客</span>
-											</li>
-										</ul>
-									</div>
-									<div class="mui-card-footer">
-										<h5>申请日期：2017-10-11</h5>
-									</div>
-								</div>
-
-								<div class="mui-card">
-									<div class="mui-card-header">
-										<span class="mui-icon iconfont icon-jilu" style="color: #007AFF;font-size: 16px;"> 20171017</span>
-										<h5 style="color: #FFB400;font-weight: bold;">审核中</h5>
-									</div>
-									<div class="mui-card-content">
-										<ul class="mui-table-view">
-											<li class="mui-table-view-cell">
-												申请金额<span style="float: right;">1000</span>
-											</li>
-											<li class="mui-table-view-cell">
-												贷款期限<span style="float: right;">30天</span>
-											</li>
-											<li class="mui-table-view-cell">
-												审批贷款期限<span style="float: right;">30天</span>
-											</li>
-											<li class="mui-table-view-cell">
-												贷款用途<span style="float: right;">请客</span>
-											</li>
-										</ul>
-									</div>
-									<div class="mui-card-footer">
-										<h5>申请日期：2017-10-11</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div id="item2mobile" class="mui-slider-item mui-control-content">
-						<div class="mui-scroll-wrapper">
-							<div class="mui-scroll">
-								<div class="mui-loading">
-									<div class="mui-spinner">
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div id="item3mobile" class="mui-slider-item mui-control-content">
-						<div id="scroll3" class="mui-scroll-wrapper">
-							<div class="mui-scroll">
-								<div class="mui-loading">
-									<div class="mui-spinner">
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<script src="../js/mui.min.js"></script>
-			<script src="../js/mui.pullToRefresh.js"></script>
-			<script src="../js/mui.pullToRefresh.material.js"></script>
-			<script type="text/javascript">
-				mui.init({
-					swipeBack: false //关闭右滑关闭功能
-				});
-				//阻尼系数
-				var deceleration = mui.os.ios ? 0.003 : 0.0009;
-				mui('.mui-scroll-wrapper').scroll({
-					bounce: false,
-					indicators: true, //是否显示滚动条
-					deceleration: deceleration
-				});
-
-				mui.ready(function() {
-					//循环初始化所有下拉刷新，上拉加载
-					mui.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
-						mui(pullRefreshEl).pullToRefresh({
-							down: {
-								callback: function() {
-									var self = this;
-									setTimeout(function() {
-										var card = self.element.querySelector('.mui-card');
-										self.element.insertBefore(createFragment(index, 3), card);
-										self.endPullDownToRefresh();
-									}, 1000);
-								}
-							},
-							up: {
-								callback: function() {
-									var self = this;
-									setTimeout(function() {
-										var pullDiv = self.element.querySelector('.mui-pull-bottom-tips');
-										self.element.insertBefore(createFragment(index, 3), pullDiv);
-										self.endPullUpToRefresh();
-									}, 1000);
-								}
-							}
-						});
-					});
-					/**
-					 * 具体业务实现
-					 */
-					var createFragment = function(index, count) {
-						var fragment = document.createDocumentFragment();
-						var div;
-						for(var i = 0; i < count; i++) {
-							div = document.createElement('div');
-							div.className = 'mui-card';
-							div.innerHTML = '<div class="mui-card-header">' +
-								'<span class="mui-icon iconfont icon-jilu" style="color: #007AFF;font-size: 16px;"> 20171017</span>' +
-								'<h5 style="color: #FFB400;font-weight: bold;">审核通过</h5>' +
-								'</div>' +
-								'<div class="mui-card-content">' +
-								'<ul class="mui-table-view">' +
-								'<li class="mui-table-view-cell">' +
-								'申请金额<span style="float: right;">1000</span>' +
-								'</li>' +
-								'<li class="mui-table-view-cell">' +
-								'贷款期限<span style="float: right;">30天</span>' +
-								'</li>' +
-								'<li class="mui-table-view-cell">' +
-								'审批贷款期限<span style="float: right;">30天</span>' +
-								'</li>' +
-								'<li class="mui-table-view-cell">' +
-								'贷款用途<span style="float: right;">请客</span>' +
-								'</li>' +
-								'</ul>' +
-								'</div>' +
-								'<div class="mui-card-footer">' +
-								'<h5>申请日期：2017-10-11</h5>' +
-								'</div>';
-							fragment.appendChild(div);
-						}
-						return fragment;
-					}
-				});
-
-				var item2 = document.getElementById('item2mobile');
-				var item3 = document.getElementById('item3mobile');
-				document.getElementById('slider').addEventListener('slide', function(e) {
-					if(e.detail.slideNumber === 1) {
-						if(item2.querySelector('.mui-loading')) {
-							setTimeout(function() {
-								item2.querySelector('.mui-scroll').innerHTML = "html2";
-							}, 500);
-						}
-					}else if(e.detail.slideNumber === 2) {
-						if(item3.querySelector('.mui-loading')) {
-							setTimeout(function() {
-								item3.querySelector('.mui-scroll').innerHTML = "html3";
-							}, 500);
-						}
-					}
-				});
-			</script>
+		<div class="mui-content"></div>
 	</body>
+	<script src="../js/mui.min.js"></script>
+	<script type="text/javascript">
+		//启用双击监听
+		mui.init({
+			gestureConfig:{
+				doubletap:true
+			},
+			subpages:[{
+				url:'record-list.html',
+				id:'record-list.html',
+				styles:{
+					top: '45px',
+					bottom: '0px',
+				}
+			}]
+		});
+	
+		var contentWebview = null;
+		document.querySelector('header').addEventListener('doubletap',function () {
+			if(contentWebview==null){
+				contentWebview = plus.webview.currentWebview().children()[0];
+			}
+			contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+		});
+	</script>
 
 </html>
