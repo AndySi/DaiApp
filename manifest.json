@@ -328,7 +328,8 @@
 					"userHtml/info-auth.html",
 					"homeHtml/loan-apply.html",
 					"homeHtml/repayment.html",
-					"homeHtml/loan-record.html"
+					"homeHtml/loan-record.html",
+					"homeHtml/loan-progress.html"
 				],
 				"priority": 0
 			},
@@ -492,7 +493,30 @@
 					"fonts/mui.ttf",
 					"css/iconfont.css",
 					"css/mui.min.css",
+					"fonts/iconfont.ttf",
+					"homeHtml/record-list.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"homeHtml/record-list.html": {
+				"resources": [
+					"js/load.js",
+					"js/vue.min.js",
+					"img/jump.gif",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
 					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"homeHtml/loan-progress.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0

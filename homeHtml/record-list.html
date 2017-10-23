@@ -73,7 +73,9 @@
 			/**
 			 * 下拉刷新具体业务实现
 			 */
+			startLoad();
 			function pulldownRefresh() {
+				endLoad();
 				if(window.plus && plus.networkinfo.getCurrentType() === plus.networkinfo.CONNECTION_NONE) {
 					plus.nativeUI.toast('似乎已断开与互联网的连接', {
 						verticalAlign: 'top'

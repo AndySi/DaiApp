@@ -1,20 +1,8 @@
-/*var md5_element = document.createElement('script');
-md5_element.setAttribute("type", "text/javascript");
-md5_element.setAttribute("src", "js/md5.js"); // 在这里引入了md5.js,md5加密保护
-document.body.appendChild(md5_element);
-
-var load_element = document.createElement("script");
-load_element.setAttribute("type", "text/javascript");
-load_element.setAttribute("src", "js/load.js"); // 在这里引入了load.js
-document.body.appendChild(load_element);*/
-
 var v = "v1.0";
-var httpUrl = "http://localhost:8080/idou_dai/router?";
+var httpUrl = "http://localhost:8080/idou_money/api";
 // app唯一键
 var app_key = "idou";
 var app_secret = "9e304d4e8df1b74cfa009913198428ab";
-// 签名(md5(param+key+secret))
-var app_digest = "";
 
 /**
  * 获取时间戳
@@ -25,6 +13,7 @@ function getTimestamp() {
 
 /**
  * 获取sign签名 
+ * 签名(md5(param+key+secret))
  * @param {Object} params
  */
 function getSign(params) {
@@ -53,9 +42,10 @@ function getReqData(params) {
 	 **/
 	owner.login = function(loginInfo, callback) {
 		callback = callback || $.noop;
+		var data = getReqData()
 		loginInfo = loginInfo || {};
-		loginInfo.account = loginInfo.account || '';
-		loginInfo.password = loginInfo.password || '';
+		data.account = loginInfo.account || '';
+		data.password = loginInfo.password || '';
 		if(loginInfo.account.length != 11) {
 			return callback('手机号最短为 11 个字符');
 		}
@@ -66,9 +56,9 @@ function getReqData(params) {
 			return callback('请输入有效的手机号码');
 		}
 
-		return owner.createUser(loginInfo, callback);
-
-		/*$.ajax("http://localhost:8080/", {
+		
+		
+		$.ajax("http://localhost:8080/", {
 			data: loginInfo,
 			dataType: 'json', //服务器返回json格式数据
 			type: 'post', //HTTP请求类型
@@ -76,21 +66,8 @@ function getReqData(params) {
 			success: function(data) {
 				if(data.Code == 1) {
 					plus.nativeUI.toast('登录成功');
-					var state = owner.defaultState; //登录后用默认State覆盖现有的State
-					state.isLogin = true; //标记已登录
-					state.user = data.Data; //保存用户信息
-					owner.setState(state);
-					//保存登录信息
-					localStorage.setItem('$user', JSON.stringify(loginInfo));
-
-					//通知资金变动页面刷新
-					var moneyChange = plus.webview.getWebviewById('moneyChange');
-					if(moneyChange) {
-						mui.fire(moneyChange, 'show');
-					}
-					//通知其他用户相关页面更新
+					return owner.createUser(loginInfo, callback);
 				}
-				return callback(data);
 			},
 			error: function(xhr, type, errorThrown) {
 				return callback({
@@ -98,7 +75,7 @@ function getReqData(params) {
 					Msg: '无法连接到服务器'
 				});
 			}
-		});*/
+		});
 	};
 
 	/**
@@ -108,6 +85,7 @@ function getReqData(params) {
 	 */
 	owner.createUser = function(data, callback) {
 		data = data || {};
+		//保存登录信息
 		localStorage.setItem('$user', JSON.stringify(data));
 		localStorage.setItem('$account', data.account);
 		return callback();
