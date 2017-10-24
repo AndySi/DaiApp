@@ -1,5 +1,5 @@
 var v = "v1.0";
-var httpUrl = "http://localhost:8080/idou_money/api";
+var httpUrl = "http://localhost:8080/api";
 // app唯一键
 var app_key = "idou";
 var app_secret = "9e304d4e8df1b74cfa009913198428ab";
@@ -42,23 +42,22 @@ function getReqData(params) {
 	 **/
 	owner.login = function(loginInfo, callback) {
 		callback = callback || $.noop;
-		var data = getReqData()
 		loginInfo = loginInfo || {};
-		data.account = loginInfo.account || '';
-		data.password = loginInfo.password || '';
-		if(loginInfo.account.length != 11) {
+		loginInfo.mobile = loginInfo.account || '';
+		loginInfo.password = loginInfo.password || '';
+		if(loginInfo.mobile.length != 11) {
 			return callback('手机号最短为 11 个字符');
 		}
 		if(loginInfo.password.length < 6) {
 			return callback('密码最短为 6 个字符');
 		}
-		if(checkPhone(loginInfo.account)) {
+		if(checkPhone(loginInfo.mobile)) {
 			return callback('请输入有效的手机号码');
 		}
 
 		
 		
-		$.ajax("http://localhost:8080/", {
+		$.ajax(httpUrl+"/login", {
 			data: loginInfo,
 			dataType: 'json', //服务器返回json格式数据
 			type: 'post', //HTTP请求类型
