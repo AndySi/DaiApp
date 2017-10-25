@@ -33,7 +33,7 @@
 			</div>
 
 			<div class="mui-content-padded">
-				<button id='login' class="mui-btn mui-btn-block xs-color-blue">登录</button>
+				<button id='login' type="button" data-loading-text="登录中" class="mui-btn mui-btn-block xs-color-blue">登录</button>
 				<div class="link-area">
 					<a id='reg'>注册账号</a> <span class="spliter">|</span>
 					<a id='forgetPassword'>忘记密码</a>
@@ -42,117 +42,123 @@
 		</div>
 		<script src="js/mui.min.js"></script>
 		<script src="js/mui.enterfocus.js"></script>
+		<script src="js/md5.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/app.js"></script>
-		<script>(function($, doc) {
-	$.init({
-		swipeBack: true
-	});
+		<script>
+			(function($, doc) {
+				$.init({
+					swipeBack: true
+				});
 
-	var loginWebview;
-	var loginButton;
-	var accountBox;
-	var passwordBox;
-	var regButton;
-	var forgetButton;
+				var loginWebview;
+				var loginButton;
+				var accountBox;
+				var passwordBox;
+				var regButton;
+				var forgetButton;
 
-	$.plusReady(function() {
-		// 恢复竖屏
-		plus.screen.lockOrientation("portrait-primary");
-		loginWebview = plus.webview.currentWebview();
-		loginButton = doc.getElementById('login');
-		accountBox = doc.getElementById('account');
-		passwordBox = doc.getElementById('password');
-		regButton = doc.getElementById('reg');
-		forgetButton = doc.getElementById('forgetPassword');
+				$.plusReady(function() {
+					// 恢复竖屏
+					plus.screen.lockOrientation("portrait-primary");
+					loginWebview = plus.webview.currentWebview();
+					loginButton = doc.getElementById('login');
+					accountBox = doc.getElementById('account');
+					passwordBox = doc.getElementById('password');
+					regButton = doc.getElementById('reg');
+					forgetButton = doc.getElementById('forgetPassword');
 
-		//检测本地的登录过的账号
-		if(localStorage.getItem('$account')) {
-			accountBox.value = localStorage.getItem('$account');
-		}
+					//检测本地的登录过的账号
+					if(localStorage.getItem('$account')) {
+						accountBox.value = localStorage.getItem('$account');
+					}
+					//登陆的点击事件
+					loginButton.addEventListener('tap', function(e) {
+						$(this).button('loading');
+						var loginInfo = {
+							utel: accountBox.value,
+							upwd: passwordBox.value
+						};
+						app.login(loginInfo, function(err) {
+							mui('#login').button('reset');
+							console.log("信息"+JSON.stringify(err))
+							if(err) {
+								plus.nativeUI.toast(err.Msg);
+								return;
+							}
+							
+							loginSuccess();
+						});
 
-		//登陆的点击事件
-		loginButton.addEventListener('tap', function(event) {
-			var loginInfo = {
-				account: accountBox.value,
-				password: passwordBox.value
-			};
-			app.login(loginInfo, function(err) {
-				if(err) {
-					plus.nativeUI.toast(err);
-					return;
+						//登录成功,向需要的页面发送消息事件通知已经登录做响应的处理
+						loginWebview.addEventListener('hide', function() {
+							var homeView = plus.webview.getLaunchWebview();
+							var userView = plus.webview.getWebviewById('tab-webview-user.html');
+							var setView = plus.webview.getWebviewById('tab-webview-setting.html');
+							$.fire(userView, 'loginSuccess', {});
+							$.fire(setView, 'loginSuccess', {});
+							loginWebview.close();
+						}, false);
+					}, false);
+
+					$.enterfocus('#login-form input', function() {
+						$.trigger(loginButton, 'tap');
+					});
+
+					//注册
+					regButton.addEventListener('tap', function(event) {
+						$.openWindow({
+							url: 'reg.html',
+							id: 'reg',
+							preload: true,
+							show: {
+								aniShow: 'pop-in'
+							},
+							styles: {
+								popGesture: 'hide'
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+					}, false);
+
+					//忘记密码
+					forgetButton.addEventListener('tap', function(event) {
+						$.openWindow({
+							url: 'forget_password.html',
+							id: 'forget_password',
+							preload: true,
+							show: {
+								aniShow: 'pop-in'
+							},
+							styles: {
+								popGesture: 'hide'
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+					}, false);
+				});
+			}(mui, document));
+
+			function loginSuccess(data) {
+				//将用户信息和account分开存放是有好处的
+				//if('10000' == data.code) {
+				/*var user = {
+					website_name: data.website_name,
+					website_logo: data.website_logo,
+					website_grade: data.website_grade,
+					website_id: data.website_id
 				}
-				loginSuccess();
-			});
-
-			//登录成功,向需要的页面发送消息事件通知已经登录做响应的处理
-			loginWebview.addEventListener('hide', function() {
-				var homeView = plus.webview.getLaunchWebview();
-				var userView = plus.webview.getWebviewById('tab-webview-user.html');
-				var setView = plus.webview.getWebviewById('tab-webview-setting.html');
-				$.fire(userView, 'loginSuccess', {});
-				$.fire(setView, 'loginSuccess', {});
-				loginWebview.close();
-			}, false);
-		}, false);
-
-		$.enterfocus('#login-form input', function() {
-			$.trigger(loginButton, 'tap');
-		});
-
-		//注册
-		regButton.addEventListener('tap', function(event) {
-			$.openWindow({
-				url: 'reg.html',
-				id: 'reg',
-				preload: true,
-				show: {
-					aniShow: 'pop-in'
-				},
-				styles: {
-					popGesture: 'hide'
-				},
-				waiting: {
-					autoShow: false
-				}
-			});
-		}, false);
-
-		//忘记密码
-		forgetButton.addEventListener('tap', function(event) {
-			$.openWindow({
-				url: 'forget_password.html',
-				id: 'forget_password',
-				preload: true,
-				show: {
-					aniShow: 'pop-in'
-				},
-				styles: {
-					popGesture: 'hide'
-				},
-				waiting: {
-					autoShow: false
-				}
-			});
-		}, false);
-	});
-}(mui, document));
-
-function loginSuccess(data) {
-	//将用户信息和account分开存放是有好处的
-	//if('10000' == data.code) {
-		/*var user = {
-			website_name: data.website_name,
-			website_logo: data.website_logo,
-			website_grade: data.website_grade,
-			website_id: data.website_id
-		}
-		//将两个数据存放起来，第一个是退出之后删除，第二个只要登录之后就会记录保存
-		localStorage.setItem('user', JSON.stringify(user));
-		localStorage.setItem('account', data.account);*/
-		mui.back();
-		mui.toast('登录成功');
-	//}
-}</script>
+				//将两个数据存放起来，第一个是退出之后删除，第二个只要登录之后就会记录保存
+				localStorage.setItem('user', JSON.stringify(user));
+				localStorage.setItem('account', data.account);*/
+				mui.back();
+				mui.toast('登录成功');
+				//}
+			}
+		</script>
 	</body>
 
 </html>

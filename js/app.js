@@ -1,8 +1,8 @@
 var v = "v1.0";
-var httpUrl = "http://localhost:8080/api";
+var httpUrl = "http://192.168.0.78:8080/api";
 // app唯一键
 var app_key = "idou";
-var app_secret = "9e304d4e8df1b74cfa009913198428ab";
+var app_secret = "QEPWQUSEPRVDVY5dfa5b32e92a484f95c897513dc624e5";
 
 /**
  * 获取时间戳
@@ -43,29 +43,33 @@ function getReqData(params) {
 	owner.login = function(loginInfo, callback) {
 		callback = callback || $.noop;
 		loginInfo = loginInfo || {};
-		loginInfo.mobile = loginInfo.account || '';
-		loginInfo.password = loginInfo.password || '';
-		if(loginInfo.mobile.length != 11) {
+		loginInfo.utel = loginInfo.utel || '';
+		var upwd = loginInfo.upwd || '';
+
+		if(loginInfo.utel.length != 11) {
 			return callback('手机号最短为 11 个字符');
 		}
-		if(loginInfo.password.length < 6) {
+		if(upwd.length < 6) {
 			return callback('密码最短为 6 个字符');
 		}
-		if(checkPhone(loginInfo.mobile)) {
+		if(checkPhone(loginInfo.utel)) {
 			return callback('请输入有效的手机号码');
 		}
-
-		
-		
-		$.ajax(httpUrl+"/login", {
+		loginInfo.upwd = hex_md5(upwd);
+		$.ajax(httpUrl + "/login", {
 			data: loginInfo,
-			dataType: 'json', //服务器返回json格式数据
-			type: 'post', //HTTP请求类型
-			timeout: 10000, //超时时间设置为10秒；
+			dataType: 'json', 
+			type: 'post', 
+			timeout: 10000, 
 			success: function(data) {
-				if(data.Code == 1) {
+				if(data.code == 0) {
 					plus.nativeUI.toast('登录成功');
 					return owner.createUser(loginInfo, callback);
+				} else {
+					return callback({
+						Code: data.code,
+						Msg: data.msg
+					});
 				}
 			},
 			error: function(xhr, type, errorThrown) {
@@ -86,7 +90,7 @@ function getReqData(params) {
 		data = data || {};
 		//保存登录信息
 		localStorage.setItem('$user', JSON.stringify(data));
-		localStorage.setItem('$account', data.account);
+		localStorage.setItem('$account', data.utel);
 		return callback();
 	}
 
@@ -101,22 +105,22 @@ function getReqData(params) {
 	/**
 	 * 退出登录
 	 */
-	owner.logout = function(options, callback){
+	owner.logout = function(options, callback) {
 		callback = callback || $.noop;
 		var data = getReqData()
-//		mui.ajax(httpUrl,{
-//			data:data,
-//			dataType:'json',//服务器返回json格式数据
-//			type:'get',//HTTP请求类型
-//			timeout:10000,//超时时间设置为10秒；
-//			success:function(data){
-//				logData(data);
-//				logoutSuccess(data);
-//			},
-//			error:function(xhr,type,errorThrown){
-//				
-//			}
-//		});
+		//		mui.ajax(httpUrl,{
+		//			data:data,
+		//			dataType:'json',//服务器返回json格式数据
+		//			type:'get',//HTTP请求类型
+		//			timeout:10000,//超时时间设置为10秒；
+		//			success:function(data){
+		//				logData(data);
+		//				logoutSuccess(data);
+		//			},
+		//			error:function(xhr,type,errorThrown){
+		//				
+		//			}
+		//		});
 		return callback();
 	}
 	/**
