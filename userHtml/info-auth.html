@@ -141,7 +141,7 @@
 				</ul>
 			</div>
 			<!-- step1 -->
-			<div class="mui-content-padded mui-hidden" style="margin: 5px;">
+			<div class="mui-content-padded" style="margin: 5px;">
 				<p style="margin: 6px auto;">联系方式</p>
 				<form class="mui-input-group">
 					<div class="mui-input-row">
@@ -187,7 +187,7 @@
 				<button id="btn_step1" class="mui-btn mui-btn-block mui-btn-primary">下一步</button>
 			</div>
 			<!-- step2 -->
-			<div class="mui-content-padded xs-div-step2" style="margin: 5px;">
+			<div class="mui-content-padded mui-hidden xs-div-step2" style="margin: 5px;">
 				<p style="margin: 6px auto;">为完善您的资产安全，请如实填写</p>
 				<div id="list-img" class="list-img">
 					<div style="height: 100%;width: 45%;float: left;margin-left: 10px;">
@@ -289,8 +289,10 @@
 							}
 							telPicker.setData(telArr);
 							telPicker.show(function(items) {
-								document.getElementById('inp_party').value = items[0].text;
-								document.getElementById('inp_partyTel').value = items[0].value;
+								if(!items[0]){
+									document.getElementById('inp_party').value = items[0].text;
+									document.getElementById('inp_partyTel').value = items[0].value;
+								}
 								//返回 false 可以阻止选择框的关闭
 								//return false;
 							});
@@ -318,8 +320,10 @@
 							}
 							telPicker.setData(telArr);
 							telPicker.show(function(items) {
-								document.getElementById('inp_contacts').value = items[0].text;
-								document.getElementById('inp_contactTel').value = items[0].value;
+								if(!items[0]){
+									document.getElementById('inp_contacts').value = items[0].text;
+									document.getElementById('inp_contactTel').value = items[0].value;
+								}
 								//返回 false 可以阻止选择框的关闭
 								//return false;
 							});

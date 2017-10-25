@@ -64,7 +64,7 @@ function getReqData(params) {
 			success: function(data) {
 				if(data.code == 0) {
 					plus.nativeUI.toast('登录成功');
-					return owner.createUser(loginInfo, callback);
+					return owner.createUser(loginInfo, data, callback);
 				} else {
 					return callback({
 						Code: data.code,
@@ -86,11 +86,13 @@ function getReqData(params) {
 	 * @param {Object} data
 	 * @param {Object} callback
 	 */
-	owner.createUser = function(data, callback) {
+	owner.createUser = function(info, data, callback) {
+		info = info || {};
 		data = data || {};
 		//保存登录信息
-		localStorage.setItem('$user', JSON.stringify(data));
-		localStorage.setItem('$account', data.utel);
+		localStorage.setItem('$user', JSON.stringify(info));
+		localStorage.setItem('$credit', data.isCredit);
+		localStorage.setItem('$account', info.utel);
 		return callback();
 	}
 

@@ -134,6 +134,7 @@
 
 			function logoutSuccess() {
 				localStorage.removeItem('$user');
+				localStorage.removeItem('$credit');
 				logoutBtn.style.display = 'none';
 				// 向需要的页面发送消息事件通知已经注销做响应的处理
 				var userView = plus.webview.getWebviewById('tab-webview-user.html');

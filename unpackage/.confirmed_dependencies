@@ -203,7 +203,11 @@
 			"fonts/mui.ttf",
 			"js/mui.min.js",
 			"css/mui.min.css",
-			"css/style.css"
+			"css/style.css",
+			"js/app.js"
+		],
+		"refer": [
+			"userHtml/info-auth.html"
 		]
 	},
 	"homeHtml/repayment.html": {
