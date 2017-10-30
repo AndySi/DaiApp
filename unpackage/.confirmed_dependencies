@@ -101,7 +101,9 @@
 			"js/md5.js"
 		],
 		"refer": [
-			"index.html"
+			"index.html",
+			"reg.html",
+			"forget_password.html"
 		]
 	},
 	"tab-webview-subpage-setting.html": {
@@ -251,6 +253,15 @@
 			"js/mui.min.js",
 			"fonts/mui.ttf",
 			"css/mui.min.css"
+		]
+	},
+	"reg.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/style.css"
 		]
 	}
 }

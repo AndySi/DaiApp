@@ -58,9 +58,9 @@ function getReqData(params) {
 		loginInfo.upwd = hex_md5(upwd);
 		$.ajax(httpUrl + "/login", {
 			data: loginInfo,
-			dataType: 'json', 
-			type: 'post', 
-			timeout: 10000, 
+			dataType: 'json',
+			type: 'post',
+			timeout: 10000,
 			success: function(data) {
 				if(data.code == 0) {
 					plus.nativeUI.toast('登录成功');
@@ -131,21 +131,20 @@ function getReqData(params) {
 	owner.reg = function(regInfo, callback) {
 		callback = callback || $.noop;
 		regInfo = regInfo || {};
-		regInfo.account = regInfo.account || '';
-		regInfo.password = regInfo.password || '';
-		if(regInfo.account.length < 5) {
+		
+		regInfo.utel = regInfo.utel || '';
+		regInfo.upwd = regInfo.upwd || '';
+		regInfo.code = regInfo.code || '';
+		
+		if(regInfo.utel.length < 5) {
 			return callback('用户名最短需要 5 个字符');
 		}
-		if(regInfo.password.length < 6) {
+		if(regInfo.upwd.length < 6) {
 			return callback('密码最短需要 6 个字符');
 		}
-		if(!checkEmail(regInfo.email)) {
-			return callback('邮箱地址不合法');
-		}
-		var user = JSON.parse(localStorage.getItem('$user') || '[]');
-		user.push(regInfo);
-		localStorage.setItem('$user', JSON.stringify(user));
-		return callback();
+		mui.post(httpUrl + "/reg", regInfo, function(data) {
+			return callback();
+		}, 'json');
 	};
 
 	/**
@@ -178,7 +177,7 @@ function getReqData(params) {
 		return aniShow;
 	}
 	var checkPhone = function(phone) {
-		var reg = /^(((13[0-9]|15[0-9]|18[0-9]{1})|147|170|177)+\d{8})$/;
+		var reg = /^(0|86|17951)?(13[0-9]|15[0-9]|18[0-9]|14[57])[0-9]{8}$/;
 		phone = phone || '';
 		return !reg.test(phone);
 	}
