@@ -42,7 +42,8 @@
 			"js/load.js",
 			"js/md5.js",
 			"css/style.css",
-			"tab-webview-home.html"
+			"tab-webview-home.html",
+			"js/xs.app.js"
 		],
 		"refer": [
 			"guide.html",
@@ -150,7 +151,15 @@
 			"css/mui.min.css",
 			"css/style.css",
 			"fonts/iconfont.ttf",
-			"js/app.js"
+			"js/app.js",
+			"homeHtml/repayment.html",
+			"js/xs.app.js",
+			"homeHtml/loan-record.html",
+			"js/xs.base.js"
+		],
+		"refer": [
+			"homeHtml/repayment.html",
+			"homeHtml/loan-record.html"
 		]
 	},
 	"tab-webview-setting.html": {
@@ -180,7 +189,9 @@
 			"js/load.js",
 			"js/md5.js",
 			"img/user.jpg",
-			"img/bg_1274x674.png"
+			"img/bg_1274x674.png",
+			"js/xs.app.js",
+			"js/xs.base.js"
 		]
 	},
 	"userHtml/info-auth.html": {
@@ -206,7 +217,9 @@
 			"js/mui.min.js",
 			"css/mui.min.css",
 			"css/style.css",
-			"js/app.js"
+			"js/app.js",
+			"js/xs.app.js",
+			"js/xs.base.js"
 		],
 		"refer": [
 			"userHtml/info-auth.html"
@@ -245,7 +258,15 @@
 			"js/mui.min.js",
 			"css/iconfont.css",
 			"css/mui.min.css",
-			"fonts/iconfont.ttf"
+			"fonts/iconfont.ttf",
+			"js/app.js",
+			"js/xs.app.js",
+			"js/xs.load.js",
+			"js/xs.base.js",
+			"js/xs.recordList.js",
+			"js/xs.record.js",
+			"js/md5.js",
+			"fonts/mui.ttf"
 		]
 	},
 	"homeHtml/loan-progress.html": {

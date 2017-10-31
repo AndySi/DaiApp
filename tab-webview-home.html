@@ -99,8 +99,10 @@
 		</div>
 	</body>
 	<script src="js/mui.min.js"></script>
-	<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/xs.base.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/xs.app.js" type="text/javascript" charset="utf-8"></script>
 	<script>
+		
 		(function($, doc) {
 			$.init({
 				swipeBack: false //启用右滑关闭功能
@@ -113,10 +115,9 @@
 			
 			var aniShow;
 			var parentWebView;
-			
 			$.plusReady(function() {
 				parentWebView = plus.webview.currentWebview().parent();
-				aniShow = app.getaniShow();
+				aniShow = getaniShow();
 				$('.mui-table-view').on('tap', 'a', function() {
 					var id = this.getAttribute('href');
 					var href = this.href;
