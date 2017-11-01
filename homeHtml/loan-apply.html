@@ -8,28 +8,8 @@
 		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/style.css" />
 		<style>
-			.xs-color-blue {
-				background-color: #3399ff;
-			}
-			
-			.div-calculator {
-				border: 2px #e7e5ec solid;
-				border-top: 4px #cdcad4 solid;
-				width: 84%;
-				margin: 0 auto;
-				background-color: #FFF;
-				overflow: hidden;
-				font-size: 15px;
-			}
-			
 			h4 {
 				font-size: 14px;
-			}
-			
-			ul,
-			li {
-				margin: 0;
-				padding: 0;
 			}
 		</style>
 	</head>
@@ -39,17 +19,17 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">贷款申请</h1>
 		</header>
-		<div class="mui-content">
+		<div id="v_app" v-cloak class="mui-content">
 			<div style="text-align: center;background: #FFF;margin: 20px auto;padding: 10px 0px;">
 				<h4>贷款金额：<span id='loan-money-val'>100</span>元</h4>
 				<div class="mui-input-range" style="padding: 0 20px;">
-					<input type="range" id='loan-money' step="100" value="100" min="100" max="10000">
+					<input type="range" id='loan-money' step="100" v-model="loanMoneyValue" min="100" v-bind:max="loanMoneyMax">
 				</div>
 			</div>
 			<div style="text-align: center;background: #FFF;margin: 20px auto;padding: 10px 0px;">
 				<h4>贷款期限：<span id='block-range-val'>1</span>个月</h4>
 				<div class="mui-input-range" style="padding: 0 20px;">
-					<input type="range" id='block-range' value="1" min="1" max="12">
+					<input type="range" id='block-range' v-model="loanMoneyMonth" min="1" max="12">
 				</div>
 			</div>
 			<div class="div-calculator">
@@ -58,16 +38,16 @@
 						<div style="width: 50%;float: left;text-align: left;padding: 10px;">
 							还款金额：
 						</div>
-						<div id="loan-money-repay" style="text-align: right;width: 50%;float: right;padding: 10px">
-							￥0
+						<div style="text-align: right;width: 50%;float: right;padding: 10px">
+							￥<span id="loan-money-repay">{{(parseInt(loanMoneyValue) + parseInt(loanMoneyValue)*parseInt(loanMoneyMonth)*0.006).toFixed(2) }}</span>
 						</div>
 					</li>
 					<li>
 						<div style="width: 50%;float: left;text-align: left;padding: 10px;">
-							贷款利息：
+							月利息：
 						</div>
 						<div id="loan-money-interest" style="text-align: right;width: 50%;float: right;padding: 10px">
-							￥0
+							0.06%
 						</div>
 					</li>
 				</ul>
@@ -77,46 +57,69 @@
 			</div>
 		</div>
 		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/md5.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/xs.base.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/xs.app.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/xs.loan.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init({
 				swipeBack: false //关闭右滑关闭功能
+			});
+
+			/**
+			 * vueJs
+			 */
+			var records = new Vue({
+				el: '#v_app',
+				data: {
+					loanMoneyMax: 2000,
+					loanMoneyValue: 100,
+					loanMoneyMonth: 1
+				}
 			});
 
 			mui.plusReady(function() {
 				document.getElementById('btn_apply').addEventListener('tap', function() {
 					mui(this).button('loading');
 					// 验证是否信用认证
-					if(!localStorage.getItem('$credit')) {
-						// 是
-						// 验证是否信用认证
-						mui.alert('贷款申请已成功提交！我们会尽快与您取得联系！', '温馨提示', function() {
-							mui('#btn_apply').button('reset');
-						});
-					} else {
-						//否
-						var btnArray = ['确定', '取消'];
-						mui.confirm('您还未进行信用认证，请进行信用认证', '提示', btnArray, function(e) {
-							mui('#btn_apply').button('reset');
-							if(e.index == 0) {
-								//确定
-								mui.openWindow({
-									url: '../userHtml/info-auth.html',
-									id: 'info-auth.html',
-									styles: {
-										popGesture: 'close'
-									},
-									show: {
-										aniShow: 'slide-in-bottom'
-									},
-									waiting: {
-										autoShow: false
-									}
+					app.fn_ajax('/userCredit', {
+						utel: localStorage.getItem('$account')
+					}, function(rsp) {
+						if(rsp.code === 0) {
+							console.log(JSON.stringify(rsp));
+							if(rsp && rsp.length > 0) {
+								// 验证是否信用认证
+								mui.alert('贷款申请已成功提交！我们会尽快与您取得联系！', '温馨提示', function() {
+									mui('#btn_apply').button('reset');
 								});
+							} else {
+								//否
+								var btnArray = ['确定', '取消'];
+								mui.confirm('您还未进行信用认证，请进行信用认证', '提示', btnArray, function(e) {
+									mui('#btn_apply').button('reset');
+									if(e.index == 0) {
+										//确定
+										mui.openWindow({
+											url: '../userHtml/info-auth.html',
+											id: 'info-auth.html',
+											styles: {
+												popGesture: 'close'
+											},
+											show: {
+												aniShow: 'slide-in-bottom'
+											},
+											waiting: {
+												autoShow: false
+											}
+										});
+									}
+								})
 							}
-						})
-					}
+						} else {
+							plus.nativeUI.toast(rsp.msg);
+						}
+					});
+
 				}, false);
 			});
 
@@ -124,17 +127,9 @@
 			var rangeList = document.querySelectorAll('input[type="range"]');
 			for(var i = 0, len = rangeList.length; i < len; i++) {
 				rangeList[i].addEventListener('input', function() {
-					if(this.id.indexOf('field') >= 0) {
-						document.getElementById(this.id + '-input').value = this.value;
-					} else {
-						document.getElementById(this.id + '-val').innerHTML = this.value;
-						document.getElementById('loan-money-repay').innerHTML = this.value;
-					}
+					document.getElementById(this.id + '-val').innerHTML = this.value;
 				});
 			}
-			mui.plusReady(function() {
-
-			});
 		</script>
 	</body>
 

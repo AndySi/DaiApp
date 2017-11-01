@@ -131,7 +131,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">信用认证</h1>
 		</header>
-		<div class="mui-content">
+		<div id="v_app" v-cloak class="mui-content">
 			<!-- progressbar -->
 			<div style="text-align: center;">
 				<ul id="progressbar">
@@ -146,19 +146,19 @@
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label>借款本人手机号：</label>
-						<input id="inp_tel" type="text" class="mui-input-clear" placeholder="请输入手机号（必填）">
+						<input id="inp_tel" value="18678781212" type="text" class="mui-input-clear" placeholder="请输入手机号（必填）">
 					</div>
 					<div class="mui-input-row">
 						<label>手机服务密码：</label>
-						<input id="inp_telpwd" type="text" class="mui-input-clear" placeholder="手机服务密码（必填）">
+						<input id="inp_telpwd" value="123456" type="text" class="mui-input-clear" placeholder="手机服务密码（必填）">
 					</div>
 					<div class="mui-input-row">
 						<label>支付宝帐号：</label>
-						<input id="inp_alipay" type="text" class="mui-input-clear" placeholder="支付宝帐号（必填）">
+						<input id="inp_alipay" value="123456@qq.com" type="text" class="mui-input-clear" placeholder="支付宝帐号（必填）">
 					</div>
 					<div class="mui-input-row">
 						<label>联系QQ：</label>
-						<input id="inp_qq" type="text" class="mui-input-clear" placeholder="请输入QQ号（必填）">
+						<input id="inp_qq" value="917661718" type="text" class="mui-input-clear" placeholder="请输入QQ号（必填）">
 					</div>
 				</form>
 				<p style="margin: 6px auto;">关系人 <span id="relativeTelPicker" class="mui-icon mui-icon mui-icon-personadd"></span></p>
@@ -191,7 +191,7 @@
 				<p style="margin: 6px auto;">为完善您的资产安全，请如实填写</p>
 				<div id="list-img" class="list-img">
 					<div style="height: 100%;width: 45%;float: left;margin-left: 10px;">
-						<div class="xs-div-card">
+						<div id="d-card-1" class="xs-div-card">
 							点击上传
 						</div>
 						<div style="text-align: center;margin-top: 5px;">
@@ -208,7 +208,7 @@
 				</div>
 				<div class="list-img" style="margin-top: 16px;">
 					<div style="height: 100%;width: 45%;float: left;margin-left: 10px;">
-						<div class="xs-div-card">
+						<div id="d-card-2" class="xs-div-card">
 							点击上传
 						</div>
 						<div style="text-align: center;margin-top: 5px;">
@@ -225,7 +225,7 @@
 				</div>
 				<div class="list-img" style="margin-top: 16px;margin-bottom: 20px;">
 					<div style="height: 100%;width: 45%;float: left;margin-left: 10px;">
-						<div class="xs-div-card">
+						<div id="d-card-3" class="xs-div-card">
 							点击上传
 						</div>
 						<div style="text-align: center;margin-top: 5px;">
@@ -242,16 +242,17 @@
 				</div>
 				<button id="btn_step2" class="mui-btn mui-btn-block mui-btn-primary">下一步</button>
 			</div>
-			<div class="mui-content-padded mui-hidden">
-				信用认证：
-				<button>完成</button>
+			<div class="mui-content-padded mui-hidden" style="margin: 5px;">
+				<p style="margin: 6px auto;">信用认证</p>
+				<button id="btn_ok" class="mui-btn mui-btn-block mui-btn-primary">完成</button>
 			</div>
 		</div>
-
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/mui.picker.js"></script>
 		<script src="../js/mui.poppicker.js"></script>
-		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/xs.base.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="../js/xs.infoAuth.js" type="text/javascript" charset="utf-8"></script>-->
 		<script type="text/javascript">
 			mui.init({
 				swipeBack: false //启用右滑关闭功能
@@ -270,9 +271,11 @@
 				});
 				//第二步操作
 				document.getElementById('btn_step2').addEventListener('tap', function() {
-					this.parentNode.classList.add('mui-hidden');
-					this.parentNode.nextElementSibling.classList.remove('mui-hidden');
-					document.querySelectorAll("#progressbar li")[2].classList.add('active');
+					if(validStep2Form()) {
+						this.parentNode.classList.add('mui-hidden');
+						this.parentNode.nextElementSibling.classList.remove('mui-hidden');
+						document.querySelectorAll("#progressbar li")[2].classList.add('active');
+					}
 				});
 				//添加关系人
 				document.getElementById('relativeTelPicker').addEventListener('tap', function(event) {
@@ -289,7 +292,7 @@
 							}
 							telPicker.setData(telArr);
 							telPicker.show(function(items) {
-								if(!items[0]){
+								if(!items[0]) {
 									document.getElementById('inp_party').value = items[0].text;
 									document.getElementById('inp_partyTel').value = items[0].value;
 								}
@@ -320,7 +323,7 @@
 							}
 							telPicker.setData(telArr);
 							telPicker.show(function(items) {
-								if(!items[0]){
+								if(!items[0]) {
 									document.getElementById('inp_contacts').value = items[0].text;
 									document.getElementById('inp_contactTel').value = items[0].value;
 								}
@@ -342,8 +345,6 @@
 					var self = this;
 					plus.gallery.pick(function(e) {
 						var name = e.substr(e.lastIndexOf('/') + 1);
-						console.log("name:" + name);
-						
 						plus.zip.compressImage({
 							src: e,
 							dst: '_doc/' + name,
@@ -351,11 +352,27 @@
 							quality: 50
 						}, function(zip) {
 							size += zip.size
-							console.log("filesize:" + zip.size + ",totalsize:" + size);
+							//console.log("filesize:" + zip.size + ",totalsize:" + size);
 							if(size > (10 * 1024 * 1024)) {
 								return mui.toast('文件超大,请重新选择');
 							}
-							self.innerHTML = '<img src="'+zip.target+'" style="width:100%;height:100%;" />'
+							self.innerHTML = '<img src="' + zip.target + '" style="width:100%;height:100%;" />'
+							switch(self.id) {
+								case 'd-card-1':
+									console.log(self.id);
+									vm.usercredit.cardFront = name;
+									break;
+								case 'd-card-2':
+									console.log(self.id);
+									vm.usercredit.cardBack = name;
+									break;
+								case 'd-card-3':
+									console.log(self.id);
+									vm.usercredit.cardHand = name;
+									break;
+								default:
+									break;
+							}
 						}, function(zipe) {
 							mui.toast('压缩失败！')
 						});
@@ -367,35 +384,63 @@
 					});
 				});
 			});
+
+			var vm = new Vue({
+				el: '#v_app',
+				data: {
+					usercredit: {}
+				}
+			})
 			/**
 			 * step1表单验证 
 			 */
 			function validStep1Form() {
-				if(document.getElementById("inp_tel").length != 11) {
+				vm.usercredit.metel = document.getElementById("inp_tel").value;
+				vm.usercredit.telpwd = document.getElementById("inp_telpwd").value;
+				vm.usercredit.alipay = document.getElementById('inp_alipay').value;
+				vm.usercredit.qq = document.getElementById('inp_qq').value;
+				vm.usercredit.partyName = document.getElementById('inp_party').value;
+				vm.usercredit.partyTel = document.getElementById('inp_partyTel').value;
+				vm.usercredit.contactsName = document.getElementById('inp_contacts').value;
+				vm.usercredit.contactsTel = document.getElementById('inp_contactsTel').value;
+
+				if(!vm.usercredit.metel) {
 					mui.toast("借款本人手机号不能为空");
 					return false;
 				}
-				if(document.getElementById("inp_telpwd").length != 4) {
+				if(vm.usercredit.metel.length != 11) {
+					mui.toast("借款本人手机号为11位");
+					return false;
+				}
+				if(checkPhone(vm.usercredit.metel)) {
+					mui.toast("请输入有效的手机号码");
+					return false;
+				}
+				if(!vm.usercredit.telpwd) {
 					mui.toast("手机服务密码不能为空");
 					return false;
 				}
-				if(!document.getElementById('inp_alipay').value) {
+				if(!vm.usercredit.alipay) {
 					mui.toast("支付宝帐号不能为空");
 					return false;
 				}
-				if(document.getElementById('inp_qq').value) {
+				if(!vm.usercredit.qq) {
 					mui.toast("QQ号码不能为空");
 					return false;
 				}
-				if(!document.getElementById('inp_party').value && !document.getElementById('inp_partyTel').value) {
+				/*if(!vm.usercredit.partyName && !vm.usercredit.partyTel) {
 					mui.toast("关系人不能为空");
 					return false;
 				}
-				if(!document.getElementById('inp_contacts').value && !document.getElementById('inp_contactsTel').value) {
+				if(!vm.usercredit.contactsName && !vm.usercredit.contactsTel) {
 					mui.toast("常用联系人不能为空");
 					return false;
-				}
+				}*/
 				return true;
+			}
+
+			function validStep2Form() {
+
 			}
 		</script>
 	</body>

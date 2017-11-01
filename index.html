@@ -8,7 +8,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="css/mui.min.css">
-		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
 	</head>
 
 	<body>
@@ -30,6 +30,7 @@
 			</a>
 		</nav>
 		<script src="js/mui.min.js"></script>
+		<script src="js/xs.base.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/xs.app.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			//mui初始化
@@ -56,6 +57,8 @@
 					//关闭splash页面；
 					plus.navigator.closeSplashscreen();
 					plus.navigator.setFullscreen(false);
+					//预加载
+					preload();
 				} else {
 					//显示启动导航
 					mui.openWindow({
@@ -71,8 +74,16 @@
 							autoShow: false
 						}
 					});
+					//延迟的原因：优先打开启动导航页面，避免资源争夺
+					setTimeout(function() {
+						//预加载
+						preload();
+					}, 200);
 				}
-				
+
+			});
+
+			function preload() {
 				//改变statusbar
 				plus.navigator.setStatusBarBackground('#41cea9');
 				//当前title
@@ -89,7 +100,7 @@
 				changeWebViewEvent();
 				//关闭启动页面
 				closeStartScreent();
-			});
+			}
 
 			//初始化每个tabitem所对应的页面
 			function initTabItemWebviews() {
@@ -213,7 +224,7 @@
 							waiting: {
 								autoShow: false
 							}
-						}); 
+						});
 					}
 				}, false);
 			}

@@ -51,7 +51,6 @@
 		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/md5.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/xs.base.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/xs.record.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init({
 				pullRefresh: {
@@ -89,7 +88,7 @@
 				}
 				//请求列表信息流
 				records.reqParam.utel = localStorage.getItem('$account');
-				app.getRecrdList(records.reqParam, function(resp) {
+				app.fn_ajax('/getUserLoanRecord', records.reqParam, function(resp) {
 					mui('#xs-wrapper').pullRefresh().endPulldown();
 					if(resp.code === 0) {
 						if(resp && resp.length > 0) {

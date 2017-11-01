@@ -64,7 +64,8 @@
 			"homeHtml/loan-apply.html",
 			"homeHtml/repayment.html",
 			"homeHtml/loan-record.html",
-			"homeHtml/loan-progress.html"
+			"homeHtml/loan-progress.html",
+			"homeHtml/quota.html"
 		]
 	},
 	"tab-webview-subpage-help.html": {

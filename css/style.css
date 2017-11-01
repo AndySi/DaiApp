@@ -1,3 +1,7 @@
+[v-cloak] {
+	display: none;
+}
+
 .ui-page-login,
 body {
 	width: 100%;
@@ -9,6 +13,12 @@ body {
 html,
 body {
 	background-color: #efeff4;
+}
+
+ul,
+li {
+	margin: 0;
+	padding: 0;
 }
 
 .mui-content {
@@ -161,4 +171,19 @@ body {
 
 .xs-d-info .mui-table-view-cell span {
 	margin: 0 8px
+}
+
+
+/**
+ * 贷款申请
+ */
+
+.div-calculator {
+	border: 2px #e7e5ec solid;
+	border-top: 4px #cdcad4 solid;
+	width: 84%;
+	margin: 0 auto;
+	background-color: #FFF;
+	overflow: hidden;
+	font-size: 15px;
 }
