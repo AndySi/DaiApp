@@ -78,7 +78,7 @@
 		"Webview": {},
 		"NativeUI": {},
 		"Navigator": {},
-		"NativeObj": {},"Device":{},"Contacts":{},"Geolocation":{},"Zip":{},"Camera":{},"Payment":{}
+		"NativeObj": {},"Device":{},"Contacts":{},"Geolocation":{},"Zip":{},"Camera":{}
 	},
 	"plus": {
 		"splashscreen": {

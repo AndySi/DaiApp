@@ -23,13 +23,13 @@
 			<div style="text-align: center;background: #FFF;margin: 20px auto;padding: 10px 0px;">
 				<h4>贷款金额：<span id='loan-money-val'>100</span>元</h4>
 				<div class="mui-input-range" style="padding: 0 20px;">
-					<input type="range" id='loan-money' step="100" v-model="loanMoneyValue" min="100" v-bind:max="loanMoneyMax">
+					<input type="range" id='loan-money' step="100" v-model="loan.loanMoney" min="100" v-bind:max="loanQuota">
 				</div>
 			</div>
 			<div style="text-align: center;background: #FFF;margin: 20px auto;padding: 10px 0px;">
 				<h4>贷款期限：<span id='block-range-val'>1</span>个月</h4>
 				<div class="mui-input-range" style="padding: 0 20px;">
-					<input type="range" id='block-range' v-model="loanMoneyMonth" min="1" max="12">
+					<input type="range" id='block-range' v-model="loan.loanTerm" min="1" max="12">
 				</div>
 			</div>
 			<div class="div-calculator">
@@ -39,7 +39,7 @@
 							还款金额：
 						</div>
 						<div style="text-align: right;width: 50%;float: right;padding: 10px">
-							￥<span id="loan-money-repay">{{(parseInt(loanMoneyValue) + parseInt(loanMoneyValue)*parseInt(loanMoneyMonth)*0.006).toFixed(2) }}</span>
+							￥<span id="loan-money-repay">{{(parseInt(loan.loanMoney) + parseInt(loan.loanMoney)*parseInt(loan.loanTerm)*0.006).toFixed(2)}}</span>
 						</div>
 					</li>
 					<li>
@@ -60,7 +60,6 @@
 		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/md5.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/xs.base.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/xs.loan.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init({
 				swipeBack: false //关闭右滑关闭功能
@@ -69,29 +68,52 @@
 			/**
 			 * vueJs
 			 */
-			var records = new Vue({
+			var vm = new Vue({
 				el: '#v_app',
 				data: {
-					loanMoneyMax: 2000,
-					loanMoneyValue: 100,
-					loanMoneyMonth: 1
+					loanQuota: 2000,
+					loan: {
+						loanMoney: 100,
+						loanTerm: 1
+					}
 				}
 			});
-
+			var sign = false;
 			mui.plusReady(function() {
 				document.getElementById('btn_apply').addEventListener('tap', function() {
 					mui(this).button('loading');
-					// 验证是否信用认证
-					app.fn_ajax('/userCredit', {
+					// 判断是否信用认证
+					app.fn_ajax('/queryUserCredit', {
 						utel: localStorage.getItem('$account')
 					}, function(rsp) {
 						if(rsp.code === 0) {
-							console.log(JSON.stringify(rsp));
-							if(rsp && rsp.length > 0) {
-								// 验证是否信用认证
-								mui.alert('贷款申请已成功提交！我们会尽快与您取得联系！', '温馨提示', function() {
-									mui('#btn_apply').button('reset');
-								});
+							if(!isEmpty(rsp.data)) {
+								//提交申请
+								if(true == sign) return false; //防止重复点击
+								sign = true;
+								if(rsp.data.creditStatu == 1) {
+									vm.loan.loanInterest = document.getElementById('loan-money-repay').innerText;
+									vm.loan.utel = localStorage.getItem('$account');
+									app.fn_ajax('/addApplyLoan', vm.loan, function(rsp) {
+										setTimeout(function() {
+											sign = false;
+											mui('#btn_apply').button('reset');
+										}, 1000);
+										if(rsp.code == 0) {
+											mui.alert('贷款申请已成功提交！我们会尽快与您取得联系！', '温馨提示', function() {
+
+											});
+										} else {
+											mui.toast(rsp.msg);
+										}
+									});
+								} else if(rsp.data.creditStatu == 0) {
+									setTimeout(function() {
+										sign = false;
+										mui('#btn_apply').button('reset');
+									}, 1000);
+									mui.toast('信用认证正在审核中，请耐心等候');
+								}
 							} else {
 								//否
 								var btnArray = ['确定', '取消'];
@@ -117,6 +139,7 @@
 							}
 						} else {
 							plus.nativeUI.toast(rsp.msg);
+							mui('#btn_apply').button('reset');
 						}
 					});
 
