@@ -17,7 +17,7 @@
 		<div class="mui-content" style="text-align: center;background: #FFF;margin: 16px 0;">
 			<canvas id="canvas" height="300" style="width: 60%;"></canvas>
 		</div>
-		<div class="mui-card">
+		<div id="v_app" class="mui-card">
 			<div class="mui-card-content">
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell">
@@ -33,13 +33,41 @@
 			<button id="btn_apply" class="mui-btn mui-btn-block xs-color-blue" style="color: #fff;">借一笔</button>
 		</div>
 		<script src="../js/mui.min.js"></script>
+		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/md5.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/xs.canvasDraw.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/xs.base.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init({
-
+				swipeBack:false,
 			});
+			var vm = new Vue({
+				el: '#v_app',
+				data: {
+					loanQuota: 2000
+				}
+			});
+			
 			mui.ready(function() {
-				drawRing(6000);
+				// 获取额度信息
+				app.fn_ajax('/',{},function(rsp){
+					drawRing(vm.loanQuota);
+				});
+				document.getElementById('btn_apply').addEventListener('tap', function(e) {
+					mui.openWindow({
+						url: 'loan-apply.html',
+						id: 'loan-apply.html',
+						styles: {
+							popGesture: 'close'
+						},
+						show: {
+							aniShow: 'slide-in-bottom'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, false);
 			});
 		</script>
 	</body>
