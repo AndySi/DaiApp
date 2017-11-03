@@ -21,7 +21,7 @@
 			<div class="mui-card-content">
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell">
-						已借款<span style="float: right;">￥2000</span>
+						已借款<span style="float: right;">￥<label v-html="loanMoney"></label></span>
 					</li>
 					<li class="mui-table-view-cell">
 						<a class="mui-navigate-right">贷款记录</a>
@@ -44,14 +44,23 @@
 			var vm = new Vue({
 				el: '#v_app',
 				data: {
-					loanQuota: 2000
+					loanQuota: 0,
+					loanMoney:0
 				}
 			});
 			
 			mui.ready(function() {
 				// 获取额度信息
-				app.fn_ajax('/',{},function(rsp){
-					drawRing(vm.loanQuota);
+				app.fn_ajax('/queryLoanQuotaInfo',{utel:localStorage.getItem('$account')},function(rsp){
+					console.log(JSON.stringify(rsp));
+					if(rsp.code == 0){
+						vm.loanQuota = rsp.data.loanQuota;
+						vm.loanMoney = rsp.data.loanMoney;
+						drawRing(vm.loanQuota);
+					} else {
+						mui.toast(rsp.msg)
+					}
+					
 				});
 				document.getElementById('btn_apply').addEventListener('tap', function(e) {
 					mui.openWindow({

@@ -541,6 +541,13 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"homeHtml/quota.html": {
+				"resources": [],
+				"refer": [
+					"homeHtml/loan-apply.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {

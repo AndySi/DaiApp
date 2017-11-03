@@ -6,6 +6,7 @@
 		<title>Document</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
 	</head>
 
 	<body>
@@ -13,33 +14,69 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">贷款进度查询</h1>
 		</header>
-		<div class="mui-content">
-			<div class="mui-card">
-				<div class="mui-card-header">
-					<h5 style="color: #007AFF;font-weight: bold;">20171017</h5>
-					<h5 style="color: #FFF;font-weight: bold;background: #EC971F;padding: 6px 10px;border-radius: 20px;">审核中</h5>
-				</div>
-				<div class="mui-card-content">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
-							审批人<span style="float: right;">人工</span>
-						</li>
-						<li class="mui-table-view-cell">
-							审批结果<span style="float: right;">通过</span>
-						</li>
-						<li class="mui-table-view-cell">
-							原因<span style="float: right;"></span>
-						</li>
-					</ul>
-				</div>
-				<div class="mui-card-footer">
-					<h5>审核日期：2017-10-11</h5>
-				</div>
-			</div>
+		<div id="v_app" v-cloak class="mui-content">
+			<card-item v-bind:item="info"></card-item>
 		</div>
 		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/md5.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/xs.base.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init({
+				swipeBack: false //关闭右滑关闭功能
+			});
+
+			Vue.component('card-item', {
+				props: ['item'],
+				template: 
+				'<p v-if="item.loanNo== undefined" style="margin: 50% auto;text-align: center;">无纪录</p>' +
+				'<div v-else-if="item.loanNo!= undefined" class="mui-card">' +
+					'<div class="mui-card-header">' +
+						'<h5 style="color: #007AFF;font-weight: bold;">{{item.loanNo}}</h5>' +
+						'<h5 style="color: #FFF;font-weight: bold;background: #EC971F;padding: 6px 10px;border-radius: 20px;">审核中</h5>' +
+					'</div>' +
+					'<div class="mui-card-content">' +
+						'<ul class="mui-table-view">' +
+							'<li class="mui-table-view-cell">' +
+							'审批人<span style="float: right;">人工</span>' +
+							'</li>' +
+							'<li class="mui-table-view-cell">' +
+							'审批结果<span style="float: right;">通过</span>' +
+							'</li>' +
+							'<li class="mui-table-view-cell">' +
+							'原因<span style="float: right;"></span>' +
+							'</li>' +
+						'</ul>' +
+					'</div>' +
+					'<div class="mui-card-footer">' +
+						'<h5>审核日期：2017-10-11</h5>' +
+					'</div>' +
+				'</div>'
+			});
+
+			var vm = new Vue({
+				el: '#v_app',
+				data: {
+					info: {}
+				},
+				methods: {
+					getInfo: function() {
+						app.fn_ajax('/getUserLoanProgress', {
+							utel: localStorage.getItem('$account')
+						}, function(rsp) {
+							console.log(JSON.stringify(rsp))
+							vm.info = rsp.data;
+						});
+					}
+				},
+				created: function() {
+					this.getInfo();
+				}
+			});
+
+			mui.plusReady(function() {
+
+			});
 		</script>
 	</body>
 

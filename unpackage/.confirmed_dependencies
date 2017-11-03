@@ -1,289 +1,294 @@
 {
-  "main.html": {
-    "resources": [
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "tab-webview-subpage-home.html"
-    ],
-    "refer": [
-      "tab-webview-subpage-home.html"
-    ]
-  },
-  "tab-webview-subpage-home.html": {
-    "resources": [
-      "images/201709110004_400x300.png",
-      "images/201709110003_400x300.png",
-      "images/201709110002_400x300.png",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "images/lb-2.png",
-      "images/lb-1.png",
-      "css/iconfont.css",
-      "fonts/iconfont.ttf",
-      "css/style.css"
-    ],
-    "refer": []
-  },
-  "guide.html": {
-    "resources": [
-      "images/guide-1.png"
-    ]
-  },
-  "index.html": {
-    "resources": [
-      "tab-webview-subpage-home.html",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "js/app.js",
-      "tab-webview-subpage-about.html",
-      "js/load.js",
-      "js/md5.js",
-      "css/style.css",
-      "tab-webview-home.html",
-      "js/xs.app.js"
-    ],
-    "refer": [
-      "guide.html",
-      "tab-webview-subpage-home.html",
-      "tab-webview-subpage-help.html",
-      "tab-webview-subpage-center.html",
-      "login.html",
-      "tab-webview-subpage-about.html",
-      "tab-webview-subpage-setting.html",
-      "tab-webview-subpage-chat.html",
-      "tab-webview-subpage-contact.html",
-      "tab-webview-subpage-user.html",
-      "userHtml/user-info.html",
-      "tab-webview-user.html",
-      "tab-webview-home.html",
-      "tab-webview-setting.html",
-      "userHtml/info-auth.html",
-      "homeHtml/loan-apply.html",
-      "homeHtml/repayment.html",
-      "homeHtml/loan-record.html",
-      "homeHtml/loan-progress.html",
-      "homeHtml/quota.html"
-    ]
-  },
-  "tab-webview-subpage-help.html": {
-    "resources": [
-      "css/feedback.css",
-      "img/logo.png",
-      "js/feedback.js",
-      "js/mui.view.js",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css"
-    ]
-  },
-  "tab-webview-subpage-center.html": {
-    "resources": [
-      "js/app.js",
-      "js/mui.min.js"
-    ],
-    "refer": [
-      "login.html"
-    ]
-  },
-  "login.html": {
-    "resources": [
-      "images/applogo.png",
-      "css/style.css",
-      "js/mui.enterfocus.js",
-      "js/app.js",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "css/iconfont.css",
-      "fonts/iconfont.ttf",
-      "js/load.js",
-      "js/md5.js"
-    ],
-    "refer": [
-      "index.html",
-      "reg.html",
-      "forget_password.html"
-    ]
-  },
-  "tab-webview-subpage-setting.html": {
-    "resources": [
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "images/applogo.png",
-      "css/style.css",
-      "js/app.js",
-      "js/load.js",
-      "js/md5.js"
-    ],
-    "refer": [
-      "login.html"
-    ]
-  },
-  "tab-webview-subpage-contact.html": {
-    "resources": [
-      "js/mui.min.js",
-      "css/mui.min.css"
-    ]
-  },
-  "tab-webview-subpage-user.html": {
-    "resources": [
-      "img/bg-960_720.png",
-      "css/iconfont.css",
-      "css/style.css",
-      "fonts/iconfont.ttf",
-      "js/app.js",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "js/load.js",
-      "js/md5.js"
-    ]
-  },
-  "tab-webview-home.html": {
-    "resources": [
-      "images/lb-2.png",
-      "images/lb-1.png",
-      "css/iconfont.css",
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/style.css",
-      "fonts/iconfont.ttf",
-      "js/app.js",
-      "homeHtml/repayment.html",
-      "js/xs.app.js",
-      "homeHtml/loan-record.html",
-      "js/xs.base.js"
-    ],
-    "refer": [
-      "homeHtml/repayment.html",
-      "homeHtml/loan-record.html"
-    ]
-  },
-  "tab-webview-setting.html": {
-    "resources": [
-      "images/applogo.png",
-      "js/app.js",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "css/style.css",
-      "js/load.js",
-      "js/md5.js",
-      "img/bg-960_720.png",
-      "img/bg_1274x674.png"
-    ]
-  },
-  "tab-webview-user.html": {
-    "resources": [
-      "img/bg-960_720.png",
-      "js/app.js",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/iconfont.css",
-      "css/mui.min.css",
-      "css/style.css",
-      "fonts/iconfont.ttf",
-      "js/load.js",
-      "js/md5.js",
-      "img/user.jpg",
-      "img/bg_1274x674.png",
-      "js/xs.app.js",
-      "js/xs.base.js"
-    ]
-  },
-  "userHtml/info-auth.html": {
-    "resources": [
-      "js/app.js",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/iconfont.css",
-      "css/mui.min.css",
-      "css/style.css",
-      "js/mui.poppicker.js",
-      "js/mui.picker.js",
-      "css/mui.poppicker.css",
-      "css/mui.picker.css",
-      "img/sfz-2.png",
-      "img/sfz-3.png",
-      "img/sfz-1.png"
-    ]
-  },
-  "homeHtml/loan-apply.html": {
-    "resources": [
-      "fonts/mui.ttf",
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/style.css",
-      "js/app.js",
-      "js/xs.app.js",
-      "js/xs.base.js"
-    ],
-    "refer": [
-      "userHtml/info-auth.html"
-    ]
-  },
-  "homeHtml/repayment.html": {
-    "resources": [
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "js/beecloud.js",
-      "css/iconfont.css",
-      "fonts/iconfont.ttf"
-    ]
-  },
-  "homeHtml/loan-record.html": {
-    "resources": [
-      "js/mui.pullToRefresh.js",
-      "js/mui.min.js",
-      "js/mui.pullToRefresh.material.js",
-      "fonts/mui.ttf",
-      "css/iconfont.css",
-      "css/mui.min.css",
-      "fonts/iconfont.ttf",
-      "homeHtml/record-list.html"
-    ],
-    "refer": [
-      "homeHtml/record-list.html"
-    ]
-  },
-  "homeHtml/record-list.html": {
-    "resources": [
-      "js/load.js",
-      "js/vue.min.js",
-      "img/jump.gif",
-      "js/mui.min.js",
-      "css/iconfont.css",
-      "css/mui.min.css",
-      "fonts/iconfont.ttf",
-      "js/app.js",
-      "js/xs.app.js",
-      "js/xs.load.js",
-      "js/xs.base.js",
-      "js/xs.recordList.js",
-      "js/xs.record.js",
-      "js/md5.js",
-      "fonts/mui.ttf"
-    ]
-  },
-  "homeHtml/loan-progress.html": {
-    "resources": [
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css"
-    ]
-  },
-  "reg.html": {
-    "resources": [
-      "js/app.js",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "css/style.css"
-    ]
-  }
+	"main.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"tab-webview-subpage-home.html"
+		],
+		"refer": [
+			"tab-webview-subpage-home.html"
+		]
+	},
+	"tab-webview-subpage-home.html": {
+		"resources": [
+			"images/201709110004_400x300.png",
+			"images/201709110003_400x300.png",
+			"images/201709110002_400x300.png",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"images/lb-2.png",
+			"images/lb-1.png",
+			"css/iconfont.css",
+			"fonts/iconfont.ttf",
+			"css/style.css"
+		],
+		"refer": []
+	},
+	"guide.html": {
+		"resources": [
+			"images/guide-1.png"
+		]
+	},
+	"index.html": {
+		"resources": [
+			"tab-webview-subpage-home.html",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/app.js",
+			"tab-webview-subpage-about.html",
+			"js/load.js",
+			"js/md5.js",
+			"css/style.css",
+			"tab-webview-home.html",
+			"js/xs.app.js"
+		],
+		"refer": [
+			"guide.html",
+			"tab-webview-subpage-home.html",
+			"tab-webview-subpage-help.html",
+			"tab-webview-subpage-center.html",
+			"login.html",
+			"tab-webview-subpage-about.html",
+			"tab-webview-subpage-setting.html",
+			"tab-webview-subpage-chat.html",
+			"tab-webview-subpage-contact.html",
+			"tab-webview-subpage-user.html",
+			"userHtml/user-info.html",
+			"tab-webview-user.html",
+			"tab-webview-home.html",
+			"tab-webview-setting.html",
+			"userHtml/info-auth.html",
+			"homeHtml/loan-apply.html",
+			"homeHtml/repayment.html",
+			"homeHtml/loan-record.html",
+			"homeHtml/loan-progress.html",
+			"homeHtml/quota.html"
+		]
+	},
+	"tab-webview-subpage-help.html": {
+		"resources": [
+			"css/feedback.css",
+			"img/logo.png",
+			"js/feedback.js",
+			"js/mui.view.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		]
+	},
+	"tab-webview-subpage-center.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js"
+		],
+		"refer": [
+			"login.html"
+		]
+	},
+	"login.html": {
+		"resources": [
+			"images/applogo.png",
+			"css/style.css",
+			"js/mui.enterfocus.js",
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/iconfont.css",
+			"fonts/iconfont.ttf",
+			"js/load.js",
+			"js/md5.js"
+		],
+		"refer": [
+			"index.html",
+			"reg.html",
+			"forget_password.html"
+		]
+	},
+	"tab-webview-subpage-setting.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"images/applogo.png",
+			"css/style.css",
+			"js/app.js",
+			"js/load.js",
+			"js/md5.js"
+		],
+		"refer": [
+			"login.html"
+		]
+	},
+	"tab-webview-subpage-contact.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"tab-webview-subpage-user.html": {
+		"resources": [
+			"img/bg-960_720.png",
+			"css/iconfont.css",
+			"css/style.css",
+			"fonts/iconfont.ttf",
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/load.js",
+			"js/md5.js"
+		]
+	},
+	"tab-webview-home.html": {
+		"resources": [
+			"images/lb-2.png",
+			"images/lb-1.png",
+			"css/iconfont.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/style.css",
+			"fonts/iconfont.ttf",
+			"js/app.js",
+			"homeHtml/repayment.html",
+			"js/xs.app.js",
+			"homeHtml/loan-record.html",
+			"js/xs.base.js"
+		],
+		"refer": [
+			"homeHtml/repayment.html",
+			"homeHtml/loan-record.html"
+		]
+	},
+	"tab-webview-setting.html": {
+		"resources": [
+			"images/applogo.png",
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/style.css",
+			"js/load.js",
+			"js/md5.js",
+			"img/bg-960_720.png",
+			"img/bg_1274x674.png"
+		]
+	},
+	"tab-webview-user.html": {
+		"resources": [
+			"img/bg-960_720.png",
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/iconfont.css",
+			"css/mui.min.css",
+			"css/style.css",
+			"fonts/iconfont.ttf",
+			"js/load.js",
+			"js/md5.js",
+			"img/user.jpg",
+			"img/bg_1274x674.png",
+			"js/xs.app.js",
+			"js/xs.base.js"
+		]
+	},
+	"userHtml/info-auth.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/iconfont.css",
+			"css/mui.min.css",
+			"css/style.css",
+			"js/mui.poppicker.js",
+			"js/mui.picker.js",
+			"css/mui.poppicker.css",
+			"css/mui.picker.css",
+			"img/sfz-2.png",
+			"img/sfz-3.png",
+			"img/sfz-1.png"
+		]
+	},
+	"homeHtml/loan-apply.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/style.css",
+			"js/app.js",
+			"js/xs.app.js",
+			"js/xs.base.js"
+		],
+		"refer": [
+			"userHtml/info-auth.html"
+		]
+	},
+	"homeHtml/repayment.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/beecloud.js",
+			"css/iconfont.css",
+			"fonts/iconfont.ttf"
+		]
+	},
+	"homeHtml/loan-record.html": {
+		"resources": [
+			"js/mui.pullToRefresh.js",
+			"js/mui.min.js",
+			"js/mui.pullToRefresh.material.js",
+			"fonts/mui.ttf",
+			"css/iconfont.css",
+			"css/mui.min.css",
+			"fonts/iconfont.ttf",
+			"homeHtml/record-list.html"
+		],
+		"refer": [
+			"homeHtml/record-list.html"
+		]
+	},
+	"homeHtml/record-list.html": {
+		"resources": [
+			"js/load.js",
+			"js/vue.min.js",
+			"img/jump.gif",
+			"js/mui.min.js",
+			"css/iconfont.css",
+			"css/mui.min.css",
+			"fonts/iconfont.ttf",
+			"js/app.js",
+			"js/xs.app.js",
+			"js/xs.load.js",
+			"js/xs.base.js",
+			"js/xs.recordList.js",
+			"js/xs.record.js",
+			"js/md5.js",
+			"fonts/mui.ttf"
+		]
+	},
+	"homeHtml/loan-progress.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		]
+	},
+	"reg.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/style.css"
+		]
+	},
+	"homeHtml/quota.html": {
+		"refer": [
+			"homeHtml/loan-apply.html"
+		]
+	}
 }
