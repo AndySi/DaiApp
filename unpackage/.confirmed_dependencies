@@ -65,7 +65,8 @@
 			"homeHtml/repayment.html",
 			"homeHtml/loan-record.html",
 			"homeHtml/loan-progress.html",
-			"homeHtml/quota.html"
+			"homeHtml/quota.html",
+			"homeHtml/loan-guide.html"
 		]
 	},
 	"tab-webview-subpage-help.html": {
@@ -248,7 +249,8 @@
 			"homeHtml/record-list.html"
 		],
 		"refer": [
-			"homeHtml/record-list.html"
+			"homeHtml/record-list.html",
+			"homeHtml/quota.html"
 		]
 	},
 	"homeHtml/record-list.html": {
@@ -288,7 +290,8 @@
 	},
 	"homeHtml/quota.html": {
 		"refer": [
-			"homeHtml/loan-apply.html"
+			"homeHtml/loan-apply.html",
+			"homeHtml/loan-record.html"
 		]
 	}
 }

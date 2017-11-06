@@ -18,19 +18,19 @@
 				<div id="xs-wrapper">
 					<div class="mui-card" v-for="item in items">
 						<div class="mui-card-header">
-							<span class="mui-icon iconfont icon-jilu" style="color: #007AFF;font-size: 16px;"> 20171017</span>
+							<span class="mui-icon iconfont icon-jilu" style="color: #007AFF;font-size: 16px;" v-html="item.loanNo"></span>
 							<h5 style="color: #FFB400;font-weight: bold;">审核通过</h5>
 						</div>
 						<div class="mui-card-content">
 							<ul class="mui-table-view">
 								<li class="mui-table-view-cell">
-									贷款金额<span style="float: right;">{{item.loanMoney}}</span>
+									贷款金额<span style="float: right;">￥{{item.loanMoney}}</span>
 								</li>
 								<li class="mui-table-view-cell">
-									贷款期限<span style="float: right;">{{item.loanTerm}}天</span>
+									贷款期限<span style="float: right;">{{item.loanTerm}}个月</span>
 								</li>
 								<li class="mui-table-view-cell">
-									审批贷款期限<span style="float: right;">{{item.passTerm}}天</span>
+									审批日期<span style="float: right;">{{item.passTerm}}</span>
 								</li>
 								<li class="mui-table-view-cell">
 									贷款用途<span style="float: right;">{{item.loanPurpose}}</span>
@@ -41,9 +41,9 @@
 							<h5>申请日期：2017-10-11</h5>
 						</div>
 					</div>
-					<div id="d_prompt" style="text-align: center;" class="mui-hidden">
-						<p style="margin: 50% auto;">无贷款记录</p>
-					</div>
+					<!--<div id="d_prompt" style="text-align: center;" v-if="isHave">
+						<p style="margin: 50% auto;">没有更多记录</p>
+					</div>-->
 				</div>
 			</div>
 		</div>
@@ -57,8 +57,9 @@
 					container: '#xs-wrapper',
 					down: {
 						style: 'circle',
-						offset: '0px',
-						auto: true,
+						color: '#3399ff',
+						offset: '0px',	//可选 默认0px,下拉刷新控件的起始位置
+						auto: true,	//可选,默认false.首次加载自动上拉刷新一次
 						callback: pulldownRefresh
 					}
 				}
@@ -70,6 +71,7 @@
 			var records = new Vue({
 				el: '#v_records',
 				data: {
+					isHave: true,
 					reqParam: {},
 					items: [] //列表信息流数据
 				}
@@ -88,17 +90,19 @@
 				}
 				//请求列表信息流
 				records.reqParam.utel = localStorage.getItem('$account');
+				if(lastId){
+					records.reqParam.id = lastId;
+				}
 				app.fn_ajax('/getUserLoanRecord', records.reqParam, function(resp) {
 					mui('#xs-wrapper').pullRefresh().endPulldown();
 					if(resp.code === 0) {
-						if(resp && resp.length > 0) {
+						if(resp && resp.data.length > 0) {
 							// 有贷款记录
-							document.getElementById('d_prompt').classList.add("mui-hidden");
-							lastId = resp[0].id; //保存最新消息的id，方便下拉刷新时使用
-							records.items = resp.concat(records.items);
+							lastId = resp.data[0].id; //保存最新消息的id，方便下拉刷新时使用
+							records.items = resp.data.concat(records.items);
 						} else {
 							// 没有贷款记录
-							document.getElementById('d_prompt').classList.remove("mui-hidden");
+							records.isHave = false;
 						}
 					} else {
 						plus.nativeUI.toast(resp.msg);

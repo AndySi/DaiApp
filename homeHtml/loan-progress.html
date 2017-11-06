@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8" />
-		<title>Document</title>
+		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/style.css" />
@@ -29,7 +29,7 @@
 			Vue.component('card-item', {
 				props: ['item'],
 				template: 
-				'<p v-if="item.loanNo== undefined" style="margin: 50% auto;text-align: center;">无纪录</p>' +
+				'<p v-if="item.loanNo== undefined" style="margin: 50% auto;text-align: center;">暂无纪录</p>' +
 				'<div v-else-if="item.loanNo!= undefined" class="mui-card">' +
 					'<div class="mui-card-header">' +
 						'<h5 style="color: #007AFF;font-weight: bold;">{{item.loanNo}}</h5>' +
@@ -64,7 +64,6 @@
 						app.fn_ajax('/getUserLoanProgress', {
 							utel: localStorage.getItem('$account')
 						}, function(rsp) {
-							console.log(JSON.stringify(rsp))
 							vm.info = rsp.data;
 						});
 					}
@@ -72,10 +71,6 @@
 				created: function() {
 					this.getInfo();
 				}
-			});
-
-			mui.plusReady(function() {
-
 			});
 		</script>
 	</body>

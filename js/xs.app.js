@@ -50,9 +50,9 @@
 	 */
 	owner.createUser = function(info, data, callback) {
 		info = info || {};
-		data = data || {};
+		data = data.data || {};
 		//保存登录信息
-		localStorage.setItem('$user', JSON.stringify(info));
+		localStorage.setItem('$user', JSON.stringify(data));
 		localStorage.setItem('$account', info.utel);
 		return callback();
 	}

@@ -331,7 +331,8 @@
 					"homeHtml/repayment.html",
 					"homeHtml/loan-record.html",
 					"homeHtml/loan-progress.html",
-					"homeHtml/quota.html"
+					"homeHtml/quota.html",
+					"homeHtml/loan-guide.html"
 				],
 				"priority": 0
 			},
@@ -509,7 +510,9 @@
 					"fonts/iconfont.ttf",
 					"homeHtml/record-list.html"
 				],
-				"refer": [],
+				"refer": [
+					"homeHtml/quota.html"
+				],
 				"priority": 0
 			},
 			"homeHtml/record-list.html": {
@@ -545,7 +548,8 @@
 			"homeHtml/quota.html": {
 				"resources": [],
 				"refer": [
-					"homeHtml/loan-apply.html"
+					"homeHtml/loan-apply.html",
+					"homeHtml/loan-record.html"
 				],
 				"priority": 0
 			}
