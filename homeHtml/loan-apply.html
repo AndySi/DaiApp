@@ -86,14 +86,18 @@
 					app.fn_ajax('/queryUserCredit', {
 						utel: localStorage.getItem('$account')
 					}, function(rsp) {
+						
 						if(rsp.code === 0) {
+							
 							if(!isEmpty(rsp.data)) {
 								//提交申请
 								if(true == sign) return false; //防止重复点击
 								sign = true;
+								console.log(rsp.data.creditStatu)
 								if(rsp.data.creditStatu == 1) {
 									vm.loan.loanInterest = document.getElementById('loan-money-repay').innerText;
 									vm.loan.utel = localStorage.getItem('$account');
+									console.log(vm.loan)
 									app.fn_ajax('/addApplyLoan', vm.loan, function(rsp) {
 										setTimeout(function() {
 											sign = false;
@@ -113,6 +117,12 @@
 										mui('#btn_apply').button('reset');
 									}, 1000);
 									mui.toast('信用认证正在审核中，请耐心等候');
+								} else{
+									setTimeout(function() {
+										sign = false;
+										mui('#btn_apply').button('reset');
+									}, 1000);
+									mui.toast('信用认证未通过审核');
 								}
 							} else {
 								//否
