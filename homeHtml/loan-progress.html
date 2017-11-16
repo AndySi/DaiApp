@@ -33,7 +33,9 @@
 				'<div v-else-if="item.loanNo!= undefined" class="mui-card">' +
 					'<div class="mui-card-header">' +
 						'<h5 style="color: #007AFF;font-weight: bold;">{{item.loanNo}}</h5>' +
-						'<h5 style="color: #FFF;font-weight: bold;background: #EC971F;padding: 6px 10px;border-radius: 20px;">审核中</h5>' +
+						'<h5 style="color: #FFF;font-weight: bold;background: #FFB800;padding: 6px 10px;border-radius: 20px;" v-if = "item.loanStatu==0">审核中</h5>' +
+						'<h5 style="color: #FFF;font-weight: bold;background: #009688;padding: 6px 10px;border-radius: 20px;" v-if = "item.loanStatu==1">通过</h5>' +
+						'<h5 style="color: #FFF;font-weight: bold;background: #FF5722;padding: 6px 10px;border-radius: 20px;" v-if = "item.loanStatu==2">拒绝</h5>' +
 					'</div>' +
 					'<div class="mui-card-content">' +
 						'<ul class="mui-table-view">' +
@@ -41,15 +43,12 @@
 							'审批人<span style="float: right;">人工</span>' +
 							'</li>' +
 							'<li class="mui-table-view-cell">' +
-							'审批结果<span style="float: right;">通过</span>' +
-							'</li>' +
-							'<li class="mui-table-view-cell">' +
-							'原因<span style="float: right;"></span>' +
+							'原因<span style="float: right;">{{item.reason}}</span>' +
 							'</li>' +
 						'</ul>' +
 					'</div>' +
 					'<div class="mui-card-footer">' +
-						'<h5>审核日期：2017-10-11</h5>' +
+						'<h5>审核日期：{{item.passTerm}}</h5>' +
 					'</div>' +
 				'</div>'
 			});
